@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+
+html {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: 'Montserrat', sans-serif;
+}
+
+.contenedor {
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 10px;
+}
+
+.card-header {
+	background-color: #007bff;
+	color: #fff;
+}
+
+label, input {
+	margin: 10px;
+}
+
