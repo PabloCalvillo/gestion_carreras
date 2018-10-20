@@ -11,15 +11,15 @@ import org.springframework.web.multipart.MultipartFile;
 @Service
 public class FileServiceImpl {
 	
-	private String file_folder = ".//src//main//resources//files//";
-	
-	public void saveFile(MultipartFile file) throws IOException {
-		if(!file.isEmpty()) {
-			byte[] bytes = file.getBytes();
-			Path path = Paths.get(file_folder + file.getOriginalFilename());
-			Files.write(path, bytes);
-		}
-	}
+	private String upload_folder = ".//src//main//resources//files//";
+
+    public void saveFile(MultipartFile file) throws IOException {
+        if(!file.isEmpty()){
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(upload_folder + file.getOriginalFilename());
+            Files.write(path,bytes);
+        }
+    }
 	
 
 }

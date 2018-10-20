@@ -1,7 +1,5 @@
 package com.proyecto.pablocalvillo.controller;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -18,6 +16,7 @@ import com.proyecto.pablocalvillo.service.impl.CarServiceImpl;
 @RequestMapping("/cars")
 public class CarController {
 	private static final String CARS_VIEW = "cars";
+	
 	@Autowired
 	@Qualifier("carServiceImpl")
 	private CarServiceImpl carServiceImpl;
@@ -35,4 +34,5 @@ public class CarController {
 		carServiceImpl.addCar(carModel);
 		return "redirect:/cars/listCars";
 	}
+
 }

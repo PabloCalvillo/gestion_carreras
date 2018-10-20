@@ -36,14 +36,11 @@
 					<label for="color">Color: </label> <input type="text"
 						class="form-control" name="color" th:field="*{color}" />
 				</div>
-				<input type="submit" class="btn btn-primary" value="Guardar coche" />
+					<div>
+					<input type="submit" class="btn btn-primary" value="Guardar coche" />
+				</div>
+				
 		</form>
-		<div class="form-group">
-			<form action="#" th:action="@{/file/addImage}" th:object="${image}">
-				<label for="foto">Foto: </label> <input type="file"
-					class="form-control-file" name="foto" accept="image/*" />
-			</form>
-
 		</div>
 </body>
 </html>

@@ -2,6 +2,7 @@ package com.proyecto.pablocalvillo.converter;
 
 import org.dozer.DozerBeanMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.proyecto.pablocalvillo.entity.Car;
 import com.proyecto.pablocalvillo.model.CarModel;
@@ -18,5 +19,4 @@ public class CarConverter {
 	public Car model2entity(CarModel carModel) {
 		return mapper.map(carModel, Car.class);
 	}
-
 }
