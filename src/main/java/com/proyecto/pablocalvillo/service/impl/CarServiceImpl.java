@@ -16,8 +16,6 @@ import com.proyecto.pablocalvillo.service.CarService;
 @Service
 public class CarServiceImpl implements CarService {
 	
-	// private String file_folder = ".//src//main//resources//files//";
-	
 	@Autowired
 	@Qualifier("carJpaRepository")
 	private CarJpaRepository carJpaRepository;
@@ -37,13 +35,13 @@ public class CarServiceImpl implements CarService {
 
 	@Override
 	public Car addCar(CarModel carModel) {
-		Car car = carConverter.model2entity(carModel);
-		return carJpaRepository.save(car);
+		return carJpaRepository.save(carConverter.model2entity(carModel));
 	}
 
 	@Override
-	public int removeCar(int id) {
-		// TODO Auto-generated method stub
+	public int removeCar(String matricula) {
+		System.out.println(carJpaRepository.findByMatricula(matricula));
+		carJpaRepository.delete(carJpaRepository.findByMatricula(matricula));
 		return 0;
 	}
 
@@ -52,6 +50,8 @@ public class CarServiceImpl implements CarService {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	
 
 	
 

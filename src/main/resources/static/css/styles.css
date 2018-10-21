@@ -8,15 +8,43 @@ body {
 	font-family: 'Montserrat', sans-serif;
 }
 
-.contenedor {
-	width: 80%;
-	margin: 0 auto;
-	margin-top: 10px;
+.header {
+	width: 100%;
 }
 
-.card-header {
-	background-color: #007bff;
-	color: #fff;
+.navbar {
+	padding-top: 1em;
+	padding-bottom: 1em;
+}
+
+main {
+	padding-top: 50px;
+}
+
+.card-body {
+	padding: 0;
+}
+
+.contenedor {
+	width: 70%;
+	margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+	.contenedor {
+		width: 100%;
+	}
+}
+
+.addCar, .addRace, .editRace {
+	margin-top: 2em;
+}
+.form-group {
+	padding: 0 1em 0 1em;
+}
+
+.form-group:first-child {
+	padding-top: 0.5em;
 }
 
 .image {
@@ -24,5 +52,15 @@ body {
 }
 
 .button {
-	margin: 5px;
+	margin-left: 1em;
+	margin-bottom: 1em;
+}
+
+
+td, th {
+	text-align: center;
+}
+
+.hidden {
+	display: none;
 }

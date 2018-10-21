@@ -10,7 +10,7 @@ public interface CarService {
 	
 	public abstract List<CarModel> listAllCars();
 	public abstract Car addCar(CarModel carModel);
-	public abstract int removeCar(int id);
+	public abstract int removeCar(String matricula);
 	public abstract Car updateCar(CarModel carModel);
 
 }

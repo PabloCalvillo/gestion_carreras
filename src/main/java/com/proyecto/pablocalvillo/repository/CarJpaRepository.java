@@ -8,4 +8,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.proyecto.pablocalvillo.entity.Car;
 
 @Repository("carJpaRepository")
-public interface CarJpaRepository extends JpaRepository<Car, Serializable> {}
+public interface CarJpaRepository extends JpaRepository<Car, Serializable> {
+	
+	public Car findByMatricula(String matricula);
+}

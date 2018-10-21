@@ -22,7 +22,7 @@ public class FileController {
 	@Qualifier("fileServiceImpl")
 	private FileServiceImpl fileServiceImpl;
 	
-    @PostMapping("/upload")
+    @PostMapping("/uploadFile")
     public String uploadFile(@RequestParam("file") MultipartFile file) {
         try {
             fileServiceImpl.saveFile(file);
@@ -30,7 +30,7 @@ public class FileController {
             e.printStackTrace();
         }
 
-        return "redirect:/cars/listCars";
+        return file.getName();
     }
 	
 	

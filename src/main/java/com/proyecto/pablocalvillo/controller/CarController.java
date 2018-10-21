@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.proyecto.pablocalvillo.model.CarModel;
@@ -15,6 +16,7 @@ import com.proyecto.pablocalvillo.service.impl.CarServiceImpl;
 @Controller
 @RequestMapping("/cars")
 public class CarController {
+	
 	private static final String CARS_VIEW = "cars";
 	
 	@Autowired
@@ -31,7 +33,17 @@ public class CarController {
 	
 	@PostMapping("/addCar")
 	public String addCar(@ModelAttribute("car") CarModel carModel) {
-		carServiceImpl.addCar(carModel);
+		try {
+			carServiceImpl.addCar(carModel);
+		} catch (Exception e) {
+			return "redirect:/cars/listCars";
+		}
+		return "redirect:/cars/listCars";
+	}
+	
+	@GetMapping("/removeCar")
+	public String removeCar(@RequestParam(name="matricula", required = true, defaultValue = "NULL") String matricula) {
+		carServiceImpl.removeCar(matricula);
 		return "redirect:/cars/listCars";
 	}
 

@@ -5,6 +5,7 @@ public class CarModel {
 	private int id, potencia;
 	private String marca, modelo, matricula, color;
 	private String foto;
+	
 	public CarModel() {
 		super();
 	}
