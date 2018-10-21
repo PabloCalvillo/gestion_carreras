@@ -16,49 +16,45 @@ import com.proyecto.pablocalvillo.service.impl.RaceServiceImpl;
 @Controller
 @RequestMapping("/races")
 public class RaceController {
-	
+
 	private static final String ADD_RACES_VIEW = "addRace";
 	private static final String EDIT_RACES_VIEW = "editRaces";
-	
+
 	@Autowired
 	@Qualifier("raceServiceImpl")
 	private RaceServiceImpl raceServiceImpl;
-	
+
 	@GetMapping("/listRaces")
 	public ModelAndView listRaces() {
 		ModelAndView mav = new ModelAndView(ADD_RACES_VIEW);
 		mav.addObject("race", new RaceModel());
 		return mav;
 	}
-	
+
 	@GetMapping("/add")
 	public ModelAndView add() {
 		ModelAndView mav = new ModelAndView(ADD_RACES_VIEW);
 		mav.addObject("race", new RaceModel());
 		return mav;
 	}
-	
+
 	@PostMapping("/addRace")
 	public String addRace(@ModelAttribute("race") RaceModel raceModel) {
 		raceServiceImpl.addRace(raceModel);
 		return "redirect:/races/add";
 	}
-	
+
 	@GetMapping("/edit")
 	public ModelAndView edit() {
 		ModelAndView mav = new ModelAndView(EDIT_RACES_VIEW);
 		mav.addObject("races", raceServiceImpl.listAllRaces());
 		return mav;
 	}
-	
+
 	@GetMapping("/removeRace")
-	public String removeRace(@RequestParam(name="id", required = true, defaultValue = "NULL") int id) {
+	public String removeRace(@RequestParam(name = "id", required = true, defaultValue = "NULL") int id) {
 		raceServiceImpl.removeRace(id);
 		return "redirect:/races/edit";
 	}
-	
-	
-	
-	
-	
+
 }

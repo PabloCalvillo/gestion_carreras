@@ -13,45 +13,48 @@
 <title>Fórmula 1/ Coches</title>
 </head>
 <body>
-	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-		<a class="navbar-brand" href="/cars/listCars">Fórmula 1</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+	<div>
+		<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+			<a class="navbar-brand" href="/cars/listCars">Fórmula 1</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse"
+				data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false"
+				aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
 
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item active"><a class="nav-link"
-					href="/cars/listCars">Coches <span class="sr-only">(current)</span>
-				</a></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Carreras </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="/races/add">Añadir carrera</a> <a
-							class="dropdown-item" href="/races/edit">Gestionar carreras</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Carreras por fecha</a>
-					</div></li>
-			</ul>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
-			</form>
-		</div>
-	</nav>
-
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"><a class="nav-link"
+						href="/cars/listCars">Coches <span class="sr-only">(current)</span>
+					</a></li>
+					<li class="nav-item dropdown"><a
+						class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+						role="button" data-toggle="dropdown" aria-haspopup="true"
+						aria-expanded="false"> Carreras </a>
+						<div class="dropdown-menu navbar-light"
+							style="background-color: #e3f2fd;"
+							aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" href="/races/add">Añadir carrera</a> <a
+								class="dropdown-item" href="/races/edit">Gestionar carreras</a>
+							<div class="dropdown-divider"></div>
+							<a class="dropdown-item" href="#">Calendario de carreras</a>
+						</div></li>
+				</ul>
+				<form class="form-inline my-2 my-lg-0">
+					<input class="form-control mr-sm-2" type="search"
+						placeholder="Search" aria-label="Search">
+					<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
+				</form>
+			</div>
+		</nav>
+	</div>
 	<main class="cars clearfix">
 	<div class="addCar contenedor card border-secondary mb-3">
 		<form action="#" th:action="@{/cars/addCar}" th:object="${car}"
 			method="post">
 			<div class="card-header">
-				<h1>Añadir Coche:</h1>
+				<h1>Añadir Coche</h1>
 			</div>
 			<div class="card-body">
 				<div class="form-group">
@@ -87,7 +90,7 @@
 	<!-- .addCar -->
 	<div class="listCars contenedor card border-secondary mb-3">
 		<div class="card-header">
-			<h1>Coches:</h1>
+			<h1>Coches</h1>
 		</div>
 		<table class="table">
 			<thead class="thead-light">
