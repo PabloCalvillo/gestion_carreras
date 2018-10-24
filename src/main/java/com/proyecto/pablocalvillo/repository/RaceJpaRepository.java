@@ -8,4 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.proyecto.pablocalvillo.entity.Race;
 
 @Repository("raceJpaRepository")
-public interface RaceJpaRepository extends JpaRepository<Race, Serializable> {}
+public interface RaceJpaRepository extends JpaRepository<Race, Serializable> {
+	
+	public Race findByNombre(String nombre);
+}

@@ -8,8 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -23,12 +21,7 @@ public class Race {
 	@Column(name = "id")
 	private int id;
 	
-	@ManyToMany
-	@JoinTable(
-			name = "participaciones",
-			joinColumns = @JoinColumn(name = "idCarrera"),
-			inverseJoinColumns = @JoinColumn(name = "idCoche")
-			)
+	@ManyToMany(mappedBy = "carreras")
 	private List<Car> coches;
 	
 	@Column(name = "nombre", length= 50)
@@ -86,4 +79,14 @@ public class Race {
 	public void setCiudad(String ciudad) {
 		this.ciudad = ciudad;
 	}
+
+	public List<Car> getCoches() {
+		return coches;
+	}
+
+	public void setCoches(List<Car> coches) {
+		this.coches = coches;
+	}
+	
+	
 }

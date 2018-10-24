@@ -2,6 +2,7 @@ package com.proyecto.pablocalvillo.entity;
 
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,7 +23,7 @@ public class Car {
 	@Column(name = "id")
 	private int id;
 	
-	@ManyToMany
+	@ManyToMany(cascade = { CascadeType.ALL })
 	@JoinTable(
 			name = "participaciones",
 			joinColumns = @JoinColumn(name = "idCoche"),
@@ -124,5 +125,14 @@ public class Car {
 	public void setFoto(String foto) {
 		this.foto = foto;
 	}
+
+	public List<Race> getCarreras() {
+		return carreras;
+	}
+
+	public void setCarreras(List<Race> carreras) {
+		this.carreras = carreras;
+	}
+	
 	
 }

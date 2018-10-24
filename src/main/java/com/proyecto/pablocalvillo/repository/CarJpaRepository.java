@@ -11,4 +11,5 @@ import com.proyecto.pablocalvillo.entity.Car;
 public interface CarJpaRepository extends JpaRepository<Car, Serializable> {
 	
 	public Car findByMatricula(String matricula);
+	
 }

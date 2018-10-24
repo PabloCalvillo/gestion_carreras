@@ -10,23 +10,28 @@ import org.springframework.stereotype.Service;
 import com.proyecto.pablocalvillo.converter.ParticipationConverter;
 import com.proyecto.pablocalvillo.entity.Participation;
 import com.proyecto.pablocalvillo.model.ParticipationModel;
+import com.proyecto.pablocalvillo.repository.CarJpaRepository;
 import com.proyecto.pablocalvillo.repository.ParticipationJpaRepository;
 import com.proyecto.pablocalvillo.service.ParticipationService;
 
 @Service
 public class ParticipationServiceImpl implements ParticipationService {
-	
+
 	@Autowired
 	@Qualifier("participationJpaRepository")
 	private ParticipationJpaRepository participationJpaRepository;
-	
+
+	@Autowired
+	@Qualifier("carJpaRepository")
+	private CarJpaRepository carJpaRepository;
+
 	@Autowired
 	@Qualifier("participationConverter")
 	private ParticipationConverter participationConverter;
 
 	@Override
 	public List<ParticipationModel> listAllParticipations() {
-		List<ParticipationModel> participationsModel= new ArrayList<ParticipationModel>();
+		List<ParticipationModel> participationsModel = new ArrayList<ParticipationModel>();
 		participationJpaRepository.findAll().forEach(participation -> {
 			participationsModel.add(participationConverter.entity2model(participation));
 		});
@@ -36,7 +41,7 @@ public class ParticipationServiceImpl implements ParticipationService {
 	@Override
 	public Participation addParticipation(ParticipationModel participationModel) {
 		return participationJpaRepository.save(participationConverter.model2entity(participationModel));
-		
+
 	}
 
 	@Override

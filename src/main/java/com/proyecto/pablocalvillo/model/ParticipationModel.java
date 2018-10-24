@@ -2,17 +2,18 @@ package com.proyecto.pablocalvillo.model;
 
 public class ParticipationModel {
 	
-	private int id, idCoche, idCarrera, posicion;
+	private int id, posicion;
+	private String coche, carrera;
 
 	public ParticipationModel() {
 		super();
 	}
 
-	public ParticipationModel(int id, int idCoche, int idCarrera, int posicion) {
+	public ParticipationModel(int id, String coche, String carrera, int posicion) {
 		super();
 		this.id = id;
-		this.idCoche = idCoche;
-		this.idCarrera = idCarrera;
+		this.coche = coche;
+		this.carrera = carrera;
 		this.posicion = posicion;
 	}
 
@@ -24,20 +25,20 @@ public class ParticipationModel {
 		this.id = id;
 	}
 
-	public int getIdCoche() {
-		return idCoche;
+	public String getCoche() {
+		return coche;
 	}
 
-	public void setIdCoche(int idCoche) {
-		this.idCoche = idCoche;
+	public void setCoche(String coche) {
+		this.coche = coche;
 	}
 
-	public int getIdCarrera() {
-		return idCarrera;
+	public String getCarrera() {
+		return carrera;
 	}
 
-	public void setIdCarrera(int idCarrera) {
-		this.idCarrera = idCarrera;
+	public void setCarrera(String carrera) {
+		this.carrera = carrera;
 	}
 
 	public int getPosicion() {
@@ -50,7 +51,7 @@ public class ParticipationModel {
 
 	@Override
 	public String toString() {
-		return "ParticipationModel [id=" + id + ", idCoche=" + idCoche + ", idCarrera=" + idCarrera + ", posicion="
+		return "ParticipationModel [id=" + id + ", coche=" + coche + ", carrera=" + carrera + ", posicion="
 				+ posicion + "]";
 	}
 	

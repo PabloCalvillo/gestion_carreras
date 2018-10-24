@@ -11,6 +11,5 @@ public interface ParticipationService {
 	public abstract Participation addParticipation(ParticipationModel participationModel);
 	public abstract int removeParticipation(int id);
 	public abstract Participation updateParticipation(ParticipationModel participationModel);
-	
 
 }

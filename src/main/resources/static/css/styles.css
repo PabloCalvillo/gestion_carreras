@@ -43,7 +43,7 @@ body {
 	}
 }
 
-.addCar, .addRace, .editRace {
+.addCar, .addRace, .editRace, .editParticipation {
 	margin-top: 1.5em;
 }
 
