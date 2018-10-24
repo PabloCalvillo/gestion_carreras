@@ -35,7 +35,8 @@
 						<a class="dropdown-item" href="/races/add">Añadir carrera</a> <a
 							class="dropdown-item" href="/races/edit">Gestionar carreras</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Carreras por fecha</a>
+						<a class="dropdown-item" href="/participation/add">Añadir
+							participaciones</a>
 					</div></li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
@@ -45,37 +46,67 @@
 			</form>
 		</div>
 	</nav>
-	<main id="editRaces clearfix">
-	<div class="editRace contenedor card border-secondary mb-3">
-		<div class="card-header">
-			<h1>Carreras</h1>
+	<div id="editRaces clearfix">
+		<div class="editRace contenedor card border-secondary mb-3">
+			<div class="card-header">
+				<h1>Carreras</h1>
+			</div>
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">Nombre</th>
+						<th scope="col">Ciudad</th>
+						<th scope="col">Fecha</th>
+						<th scope="col">Eliminar</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="race: ${races}">
+						<form action="#" th:action="@{/races/removeRace}" method="get">
+							<td><span th:text="${race.nombre}">Nombre</span></td>
+							<td><span th:text="${race.ciudad}">Ciudad</span></td>
+							<td><span th:text="${race.fecha}">Fecha</span></td>
+							<td><input type="text" name="id" th:value=${race.id}
+								class="hidden" />
+								<button type="submit">
+									<i class="fas fa-trash-alt"></i>
+								</button></td>
+						</form>
+					</tr>
+				</tbody>
+			</table>
 		</div>
-		<table class="table">
-			<thead class="thead-light">
-				<tr>
-					<th scope="col">Nombre</th>
-					<th scope="col">Ciudad</th>
-					<th scope="col">Fecha</th>
-					<th scope="col">Eliminar</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="race: ${races}">
-					<form action="#" th:action="@{/races/removeRace}" method="get">
-					<td><span th:text="${race.nombre}">Nombre</span></td>
-					<td><span th:text="${race.ciudad}">Ciudad</span></td>
-					<td><span th:text="${race.fecha}">Fecha</span></td>
-					<td><input type="text" name="id" th:value=${race.id}
-						class="hidden" />
-						<button type="submit">
-							<i class="fas fa-trash-alt"></i>
-						</button></td>
-					</form>
-				</tr>
-			</tbody>
-		</table>
+		<!-- .editRaces -->
+		<div class="editParticipation contenedor card border-secondary mb-3">
+			<div class="card-header">
+				<h1>Participaciones</h1>
+			</div>
+			<table class="table">
+				<thead class="thead-light">
+					<tr>
+						<th scope="col">Carrera</th>
+						<th scope="col">Coche</th>
+						<th scope="col">Posición</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="participation: ${participations}">
+						<form action="#" th:action="@{/participations/listParticipations}" method="get">
+							<td><span th:text="${participation.idCarrera}">Carrera</span></td>
+							<td><span th:text="${participation.idCoche}">Coche</span></td>
+							<td><span th:text="${participation.posicion}">Posición</span></td>
+							<td><input type="text" name="id" th:value=${participation.id}
+								class="hidden" />
+								<button type="submit">
+									<i class="fas fa-trash-alt"></i>
+								</button></td>
+						</form>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<!-- .editParticipation -->
 	</div>
-	<!-- .editRaces --> </main>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>

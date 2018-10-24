@@ -38,7 +38,7 @@
 							<a class="dropdown-item" href="/races/add">Añadir carrera</a> <a
 								class="dropdown-item" href="/races/edit">Gestionar carreras</a>
 							<div class="dropdown-divider"></div>
-							<a class="dropdown-item" href="#">Calendario de carreras</a>
+							<a class="dropdown-item" href="/participation/add">Añadir participaciones</a>
 						</div></li>
 				</ul>
 				<form class="form-inline my-2 my-lg-0">
@@ -49,7 +49,7 @@
 			</div>
 		</nav>
 	</div>
-	<main class="cars clearfix">
+	<div class="cars clearfix">
 	<div class="addCar contenedor card border-secondary mb-3">
 		<form action="#" th:action="@{/cars/addCar}" th:object="${car}"
 			method="post">
@@ -122,7 +122,7 @@
 		</table>
 
 	</div>
-	<!-- .listCars --> </main>
+	<!-- .listCars --> </div>
 	<!-- .cars -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
