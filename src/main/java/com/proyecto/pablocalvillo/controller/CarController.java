@@ -16,18 +16,25 @@ import com.proyecto.pablocalvillo.service.impl.CarServiceImpl;
 @Controller
 @RequestMapping("/cars")
 public class CarController {
-	
-	private static final String CARS_VIEW = "cars";
-	
+
+	private static final String EDIT_CARS_VIEW = "editCars";
+	private static final String ADD_CAR_VIEW = "addCar";
+
 	@Autowired
 	@Qualifier("carServiceImpl")
 	private CarServiceImpl carServiceImpl;
-	
+
 	@GetMapping("/listCars")
 	public ModelAndView listAllCars() {
-		ModelAndView mav = new ModelAndView(CARS_VIEW);
-		mav.addObject("car", new CarModel());
+		ModelAndView mav = new ModelAndView(EDIT_CARS_VIEW);
 		mav.addObject("cars", carServiceImpl.listAllCars());
+		return mav;
+	}
+	
+	@GetMapping("/add")
+	public ModelAndView add() {
+		ModelAndView mav = new ModelAndView(ADD_CAR_VIEW);
+		mav.addObject("car", new CarModel());
 		return mav;
 	}
 	
@@ -36,13 +43,14 @@ public class CarController {
 		try {
 			carServiceImpl.addCar(carModel);
 		} catch (Exception e) {
-			return "redirect:/cars/listCars";
+			return "redirect:/cars/add";
 		}
-		return "redirect:/cars/listCars";
+		return "redirect:/cars/add";
 	}
-	
+
 	@GetMapping("/removeCar")
-	public String removeCar(@RequestParam(name="matricula", required = true, defaultValue = "NULL") String matricula) {
+	public String removeCar(
+			@RequestParam(name = "matricula", required = true, defaultValue = "NULL") String matricula) {
 		carServiceImpl.removeCar(matricula);
 		return "redirect:/cars/listCars";
 	}

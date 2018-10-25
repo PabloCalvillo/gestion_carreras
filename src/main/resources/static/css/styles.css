@@ -19,7 +19,7 @@ body {
 }
 
 .dropdown-menu {
-	margin-top: 14px;
+	margin-top: 15px;
 }
 
 @media ( max-width : 900px) {
@@ -35,16 +35,13 @@ body {
 .contenedor {
 	width: 70%;
 	margin: 0 auto;
+	margin-top: 1.5em;
 }
 
 @media ( max-width : 900px) {
 	.contenedor {
 		width: 100%;
 	}
-}
-
-.addCar, .addRace, .editRace, .editParticipation {
-	margin-top: 1.5em;
 }
 
 .form-group {
