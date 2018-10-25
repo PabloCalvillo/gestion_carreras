@@ -12,5 +12,6 @@ public interface CarService {
 	public abstract Car addCar(CarModel carModel);
 	public abstract int removeCar(String matricula);
 	public abstract Car updateCar(CarModel carModel);
+	public abstract Car findByMatricula(String matricula);
 
 }

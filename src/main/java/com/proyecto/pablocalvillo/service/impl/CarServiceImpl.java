@@ -40,15 +40,18 @@ public class CarServiceImpl implements CarService {
 
 	@Override
 	public int removeCar(String matricula) {
-		System.out.println(carJpaRepository.findByMatricula(matricula));
 		carJpaRepository.delete(carJpaRepository.findByMatricula(matricula));
 		return 0;
 	}
 
 	@Override
 	public Car updateCar(CarModel carModel) {
-		// TODO Auto-generated method stub
-		return null;
+		return carJpaRepository.save(carConverter.model2entity(carModel));
+	}
+
+	@Override
+	public Car findByMatricula(String matricula) {
+		return carJpaRepository.findByMatricula(matricula);
 	}
 
 	

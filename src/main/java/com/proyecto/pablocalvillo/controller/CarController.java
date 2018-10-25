@@ -12,6 +12,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.proyecto.pablocalvillo.model.CarModel;
 import com.proyecto.pablocalvillo.service.impl.CarServiceImpl;
+import com.proyecto.pablocalvillo.service.impl.RaceServiceImpl;
 
 @Controller
 @RequestMapping("/cars")
@@ -19,6 +20,11 @@ public class CarController {
 
 	private static final String EDIT_CARS_VIEW = "editCars";
 	private static final String ADD_CAR_VIEW = "addCar";
+	private static final String EDIT_CAR_VIEW = "editCar";
+
+	@Autowired
+	@Qualifier("raceServiceImpl")
+	private RaceServiceImpl raceServiceImpl;
 
 	@Autowired
 	@Qualifier("carServiceImpl")
@@ -30,14 +36,14 @@ public class CarController {
 		mav.addObject("cars", carServiceImpl.listAllCars());
 		return mav;
 	}
-	
+
 	@GetMapping("/add")
 	public ModelAndView add() {
 		ModelAndView mav = new ModelAndView(ADD_CAR_VIEW);
 		mav.addObject("car", new CarModel());
 		return mav;
 	}
-	
+
 	@PostMapping("/addCar")
 	public String addCar(@ModelAttribute("car") CarModel carModel) {
 		try {
@@ -46,6 +52,21 @@ public class CarController {
 			return "redirect:/cars/add";
 		}
 		return "redirect:/cars/add";
+	}
+
+	@PostMapping("/updateCar")
+	public String updateCar(@ModelAttribute("car") CarModel carModel) {
+		carServiceImpl.updateCar(carModel);
+		return "redirect:/cars/listCars";
+	}
+
+	@GetMapping("/editCar")
+	public ModelAndView editCar(
+			@RequestParam(name = "matricula", required = true, defaultValue = "NULL") String matricula) {
+		ModelAndView mav = new ModelAndView(EDIT_CAR_VIEW);
+		mav.addObject(carServiceImpl.findByMatricula(matricula));
+		mav.addObject("races", raceServiceImpl.listAllRaces());
+		return mav;
 	}
 
 	@GetMapping("/removeCar")

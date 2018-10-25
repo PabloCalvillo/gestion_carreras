@@ -23,5 +23,4 @@ public class QueryDSLCar {
 		
 		return query.select(qcar).from(qcar).where(qcar.id.eq(id)).fetchOne();
 	}
-
 }

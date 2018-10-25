@@ -34,7 +34,7 @@ public class Car {
 			)
 	private List<Race> carreras;
 	
-	@Column(name= "matricula", length= 20, unique = true)
+	@Column(name= "matricula", length= 20)
 	@NotNull
 	private String matricula;
 	

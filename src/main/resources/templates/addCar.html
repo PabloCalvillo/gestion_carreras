@@ -10,7 +10,7 @@
 	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
 	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
 	crossorigin="anonymous">
-<title>Fórmula 1/ Añadir participación</title>
+<title>Fórmula 1/ Añadir coche</title>
 </head>
 <body>
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
@@ -53,7 +53,6 @@
 			</form>
 		</div>
 	</nav>
-	<div class="cars clearfix">
 		<div class="addCar contenedor card border-secondary mb-3">
 			<form action="#" th:action="@{/cars/addCar}" th:object="${car}"
 				method="post">
