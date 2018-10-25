@@ -57,7 +57,6 @@ public class ParticipationController {
 	
 	@PostMapping("/addParticipation")
 	public String addParticipation(@ModelAttribute("participation") ParticipationModel participationModel) {
-		System.out.println("POSICIÓN------------" + participationModel.getPosicion());
 		participationServiceImpl.addParticipation(participationModel);		
 		return "redirect:/participation/add";
 	}

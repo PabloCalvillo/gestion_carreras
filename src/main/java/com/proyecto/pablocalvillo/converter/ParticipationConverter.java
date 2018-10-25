@@ -8,6 +8,8 @@ import org.springframework.stereotype.Component;
 import com.proyecto.pablocalvillo.entity.Participation;
 import com.proyecto.pablocalvillo.model.ParticipationModel;
 import com.proyecto.pablocalvillo.repository.CarJpaRepository;
+import com.proyecto.pablocalvillo.repository.QueryDSLCar;
+import com.proyecto.pablocalvillo.repository.QueryDSLRace;
 import com.proyecto.pablocalvillo.repository.RaceJpaRepository;
 
 
@@ -24,11 +26,19 @@ public class ParticipationConverter {
 	@Qualifier("carJpaRepository")
 	private CarJpaRepository carJpaRepository;
 	
+	@Autowired
+	@Qualifier("queryDSLCar")
+	private QueryDSLCar queryDSLCar;
+	
+	@Autowired
+	@Qualifier("queryDSLRace")
+	private QueryDSLRace queryDSLRace;
+	
 	public ParticipationModel entity2model(Participation participation) {
 		ParticipationModel participationModel = new ParticipationModel();
 		participationModel.setId(participation.getId());
-		participationModel.setCarrera(raceJpaRepository.findById(participation.getIdCarrera()).get().getNombre());
-		participationModel.setCoche(carJpaRepository.findById(participation.getIdCoche()).get().getMatricula());
+		participationModel.setCarrera(queryDSLRace.find(participation.getIdCarrera()).getNombre());
+		participationModel.setCoche(queryDSLCar.find(participation.getIdCoche()).getMatricula());
 		participationModel.setPosicion(participation.getPosicion());
 		return participationModel;
 	}
