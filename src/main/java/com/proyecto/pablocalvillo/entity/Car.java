@@ -23,7 +23,10 @@ public class Car {
 	@Column(name = "id")
 	private int id;
 	
-	@ManyToMany(cascade = { CascadeType.ALL })
+	@ManyToMany(cascade = { 
+	        CascadeType.PERSIST, 
+	        CascadeType.MERGE
+	    })
 	@JoinTable(
 			name = "participaciones",
 			joinColumns = @JoinColumn(name = "idCoche"),

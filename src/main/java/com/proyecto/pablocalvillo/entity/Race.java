@@ -3,11 +3,14 @@ package com.proyecto.pablocalvillo.entity;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
@@ -21,7 +24,15 @@ public class Race {
 	@Column(name = "id")
 	private int id;
 	
-	@ManyToMany(mappedBy = "carreras")
+	@ManyToMany(cascade = { 
+	        CascadeType.PERSIST, 
+	        CascadeType.MERGE
+	    })
+	@JoinTable(
+			name = "participaciones",
+			joinColumns = @JoinColumn(name = "idCarrera"),
+			inverseJoinColumns = @JoinColumn(name = "idCoche")
+			)
 	private List<Car> coches;
 	
 	@Column(name = "nombre", length= 50)
