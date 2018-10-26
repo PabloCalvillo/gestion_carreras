@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyecto.pablocalvillo.model.RaceModel;
 import com.proyecto.pablocalvillo.service.impl.RaceServiceImpl;
@@ -39,8 +40,16 @@ public class RaceController {
 	}
 
 	@PostMapping("/addRace")
-	public String addRace(@ModelAttribute("race") RaceModel raceModel) {
-		raceServiceImpl.addRace(raceModel);
+	public String addRace(@ModelAttribute("race") RaceModel raceModel, 	RedirectAttributes redirectAttributes) {
+		try {
+			raceServiceImpl.addRace(raceModel);
+			redirectAttributes.addFlashAttribute("success", true);
+		} catch(Exception e) {
+			redirectAttributes.addFlashAttribute("success", false);
+			return "redirect:/races/add";
+			
+		}
+		
 		return "redirect:/races/add";
 	}
 

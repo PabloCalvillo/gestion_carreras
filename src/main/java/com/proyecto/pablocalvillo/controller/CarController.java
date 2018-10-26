@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyecto.pablocalvillo.model.CarModel;
 import com.proyecto.pablocalvillo.service.impl.CarServiceImpl;
@@ -45,10 +46,13 @@ public class CarController {
 	}
 
 	@PostMapping("/addCar")
-	public String addCar(@ModelAttribute("car") CarModel carModel) {
+	public String addCar(@ModelAttribute("car") CarModel carModel, RedirectAttributes redirectAttributes) {
 		try {
 			carServiceImpl.addCar(carModel);
+			redirectAttributes.addFlashAttribute("success", true);
+			
 		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("success", false);
 			return "redirect:/cars/add";
 		}
 		return "redirect:/cars/add";

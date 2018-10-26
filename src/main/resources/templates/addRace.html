@@ -61,6 +61,13 @@
 				<div class="card-header">
 					<h1>Añadir Carrera</h1>
 				</div>
+				<div th:if="${success eq true}">
+					<div class="alert alert-primary" role="alert">Carrera añadida
+						con éxito</div>
+				</div>
+				<div th:if="${success eq false}">
+					<div class="alert alert-danger" role="alert">Algo ha salido mal</div>
+				</div>
 				<div class="card-body">
 					<div class="form-group">
 						<label for="marca">Nombre: </label> <input type="text"
