@@ -1,5 +1,7 @@
 package com.proyecto.pablocalvillo.controller;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.proyecto.pablocalvillo.model.ParticipationModel;
 import com.proyecto.pablocalvillo.model.RaceModel;
+import com.proyecto.pablocalvillo.service.impl.CarServiceImpl;
+import com.proyecto.pablocalvillo.service.impl.ParticipationServiceImpl;
 import com.proyecto.pablocalvillo.service.impl.RaceServiceImpl;
 
 @Controller
@@ -20,17 +25,19 @@ public class RaceController {
 
 	private static final String ADD_RACES_VIEW = "addRace";
 	private static final String EDIT_RACES_VIEW = "editRaces";
+	private static final String EDIT_RACE_VIEW = "editRace";
 
 	@Autowired
 	@Qualifier("raceServiceImpl")
 	private RaceServiceImpl raceServiceImpl;
-
-	@GetMapping("/listRaces")
-	public ModelAndView listRaces() {
-		ModelAndView mav = new ModelAndView(ADD_RACES_VIEW);
-		mav.addObject("race", new RaceModel());
-		return mav;
-	}
+	
+	@Autowired
+	@Qualifier("carServiceImpl")
+	private CarServiceImpl carServiceImpl;
+	
+	@Autowired
+	@Qualifier("participationServiceImpl")
+	ParticipationServiceImpl participationServiceImpl;
 
 	@GetMapping("/add")
 	public ModelAndView add() {
@@ -64,6 +71,23 @@ public class RaceController {
 	public String removeRace(@RequestParam(name = "id", required = true, defaultValue = "NULL") int id) {
 		raceServiceImpl.removeRace(id);
 		return "redirect:/races/edit";
+	}
+	
+	@GetMapping("/editRace")
+	public ModelAndView editRace(
+			@RequestParam(name = "id", required = true, defaultValue = "NULL") int id) {
+		ModelAndView mav = new ModelAndView(EDIT_RACE_VIEW);
+		mav.addObject("race", raceServiceImpl.findById(id));
+		mav.addObject("participations", participationServiceImpl.listRaceParticipations(id));
+		mav.addObject("participation", new ParticipationModel());
+		mav.addObject("cars", carServiceImpl.listAllCars());
+		return mav;
+	}
+	
+	@GetMapping("/removeParticipation")
+	public String removeParticipation(@RequestParam Map<String, String> requestParams) throws Exception {
+		participationServiceImpl.removeParticipation(Integer.parseInt(requestParams.get("id")));
+		return "redirect:/races/editRace?id=" + raceServiceImpl.findByName(requestParams.get("carrera")).getId();
 	}
 
 }

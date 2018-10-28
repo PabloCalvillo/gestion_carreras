@@ -8,6 +8,8 @@ import com.proyecto.pablocalvillo.model.ParticipationModel;
 public interface ParticipationService {
 	
 	public abstract List<ParticipationModel> listAllParticipations();
+	public abstract List<ParticipationModel> listParticipations(String matricula);
+	public abstract List<ParticipationModel> listRaceParticipations(int idCarrera);
 	public abstract Participation addParticipation(ParticipationModel participationModel);
 	public abstract int removeParticipation(int id);
 	public abstract Participation updateParticipation(ParticipationModel participationModel);

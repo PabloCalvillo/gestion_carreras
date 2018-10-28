@@ -14,14 +14,13 @@
 </head>
 <body>
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-		<a class="navbar-brand" href="/cars/listCars">Fórmula 1</a>
+		<a class="navbar-brand" href="/index">Fórmula 1</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item dropdown"><a
@@ -41,8 +40,7 @@
 						<a class="dropdown-item" href="/races/add">Añadir carrera</a> <a
 							class="dropdown-item" href="/races/edit">Gestionar carreras</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="#">Añadir participaciones</a> <a
-							class="dropdown-item" href="/participation/listParticipations">Gestionar
+						<a class="dropdown-item" href="/participation/listAllParticipations">Gestionar
 							participaciones</a>
 					</div></li>
 			</ul>
@@ -64,7 +62,8 @@
 					con éxito</div>
 			</div>
 			<div th:if="${success eq false}">
-				<div class="alert alert-danger" role="alert">La matrícula ya existe</div>
+				<div class="alert alert-danger" role="alert">La matrícula ya
+					existe</div>
 			</div>
 			<div class="card-body">
 				<div class="form-group">

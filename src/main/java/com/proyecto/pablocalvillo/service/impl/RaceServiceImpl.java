@@ -46,8 +46,16 @@ public class RaceServiceImpl implements RaceService {
 
 	@Override
 	public Race updateRace(RaceModel raceModel) {
-		// TODO Auto-generated method stub
-		return null;
+		return raceJpaRepository.save(raceConverter.model2entity(raceModel));
 	}
 
+	@Override
+	public Race findById(int id) {
+		return (Race) raceJpaRepository.findById(id).get();
+	}
+
+	@Override
+	public Race findByName(String name) {
+		return raceJpaRepository.findByNombre(name);
+	}	
 }

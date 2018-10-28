@@ -14,7 +14,7 @@
 </head>
 <body>
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-		<a class="navbar-brand" href="/cars/listCars">Fórmula 1</a>
+		<a class="navbar-brand" href="/index">Fórmula 1</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
 			aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -41,9 +41,8 @@
 						<a class="dropdown-item" href="/races/add">Añadir carrera</a> <a
 							class="dropdown-item" href="/races/edit">Gestionar carreras</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="/participation/add">Añadir
-							participaciones</a> <a class="dropdown-item"
-							href="/participation/listParticipations">Gestionar
+						<a class="dropdown-item"
+							href="/participation/listAllParticipations">Gestionar
 							participaciones</a>
 					</div></li>
 			</ul>
@@ -66,7 +65,7 @@
 							<th scope="col">Nombre</th>
 							<th scope="col">Ciudad</th>
 							<th scope="col">Fecha</th>
-							<th scope="col">Eliminar</th>
+							<th scope="col">Gestionar / Eliminar</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -77,6 +76,9 @@
 								<td><span th:text="${race.fecha}">Fecha</span></td>
 								<td><input type="text" name="id" th:value=${race.id}
 									class="hidden" />
+								<button th:formaction="@{/races/editRace}" type="submit">
+										<i class="fas fa-edit"></i>
+									</button>
 									<button type="submit">
 										<i class="fas fa-trash-alt"></i>
 									</button></td>

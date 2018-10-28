@@ -15,7 +15,7 @@ public class RaceModel {
 	public RaceModel(int id, String nombre, String ciudad, Date fecha) {
 		super();
 		this.id = id;
-		this.nombre = nombre;
+		this.nombre = nombre.replace(" ", "-");
 		this.ciudad = ciudad;
 		this.fecha = fecha;
 	}
@@ -33,7 +33,7 @@ public class RaceModel {
 	}
 
 	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		this.nombre = nombre.replace(" ", "-");;
 	}
 
 	public String getCiudad() {

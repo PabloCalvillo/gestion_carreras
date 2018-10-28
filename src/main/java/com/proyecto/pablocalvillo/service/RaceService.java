@@ -11,5 +11,6 @@ public interface RaceService {
 	public abstract Race addRace(RaceModel raceModel);
 	public abstract int removeRace(int id);
 	public abstract Race updateRace(RaceModel raceModel);
-	
+	public abstract Race findById(int id);
+	public abstract Race findByName(String name);
 }

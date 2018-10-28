@@ -23,7 +23,5 @@ public class QueryDSLRace {
 		
 		return query.select(qrace).from(qrace).where(qrace.id.eq(id)).fetchOne();
 	}
-	
-	
 
 }
