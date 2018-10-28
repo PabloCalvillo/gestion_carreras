@@ -1,20 +1,24 @@
 package com.proyecto.pablocalvillo.model;
 
+import java.sql.Date;
+
 public class ParticipationModel {
 	
 	private int id, posicion;
 	private String coche, carrera;
+	private Date fecha;
 
 	public ParticipationModel() {
 		super();
 	}
 
-	public ParticipationModel(int id, String coche, String carrera, int posicion) {
+	public ParticipationModel(int id, String coche, String carrera, int posicion, Date fecha) {
 		super();
 		this.id = id;
 		this.coche = coche;
 		this.carrera = carrera;
 		this.posicion = posicion;
+		this.fecha = fecha;
 	}
 
 	public int getId() {
@@ -47,6 +51,14 @@ public class ParticipationModel {
 
 	public void setPosicion(int posicion) {
 		this.posicion = posicion;
+	}
+	
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
 	}
 
 	@Override

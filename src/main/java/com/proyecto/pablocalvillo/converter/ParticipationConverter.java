@@ -40,6 +40,7 @@ public class ParticipationConverter {
 		participationModel.setCarrera(queryDSLRace.find(participation.getIdCarrera()).getNombre());
 		participationModel.setCoche(queryDSLCar.find(participation.getIdCoche()).getMatricula());
 		participationModel.setPosicion(participation.getPosicion());
+		participationModel.setFecha(raceJpaRepository.findById(participation.getIdCarrera()).get().getFecha());
 		return participationModel;
 	}
 	

@@ -1,5 +1,7 @@
 package com.proyecto.pablocalvillo.repository;
 
+import java.sql.Date;
+
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
@@ -22,6 +24,13 @@ public class QueryDSLRace {
 		JPAQuery<Race> query = new JPAQuery<Race>(em);
 		
 		return query.select(qrace).from(qrace).where(qrace.id.eq(id)).fetchOne();
+	}
+	
+	public Date getDate(int id) {
+		
+		JPAQuery<Race> query = new JPAQuery<Race>(em);
+		
+		return (Date) query.select(qrace.fecha).from(qrace).where(qrace.id.eq(id)).fetchOne();
 	}
 
 }

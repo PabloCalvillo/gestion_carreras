@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.proyecto.pablocalvillo.converter.RaceConverter;
 import com.proyecto.pablocalvillo.entity.Race;
 import com.proyecto.pablocalvillo.model.RaceModel;
+import com.proyecto.pablocalvillo.repository.QueryDSLRace;
 import com.proyecto.pablocalvillo.repository.RaceJpaRepository;
 import com.proyecto.pablocalvillo.service.RaceService;
 
@@ -19,6 +20,10 @@ public class RaceServiceImpl implements RaceService {
 	@Autowired
 	@Qualifier("raceJpaRepository")
 	private RaceJpaRepository raceJpaRepository;
+	
+	@Autowired
+	@Qualifier("queryDSLRace")
+	private QueryDSLRace queryDSLRace;
 	
 	@Autowired
 	@Qualifier("raceConverter")
@@ -51,7 +56,7 @@ public class RaceServiceImpl implements RaceService {
 
 	@Override
 	public Race findById(int id) {
-		return (Race) raceJpaRepository.findById(id).get();
+		return queryDSLRace.find(id);
 	}
 
 	@Override

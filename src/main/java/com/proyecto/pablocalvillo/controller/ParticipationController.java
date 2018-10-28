@@ -51,7 +51,6 @@ public class ParticipationController {
 	
 	@PostMapping("/addParticipationRace")
 	public String addParticipationRace(@ModelAttribute("participation") ParticipationModel participationModel, RedirectAttributes redirectAttributes) {
-		System.out.println(participationModel + "----------------------------------------------");
 		try {
 			participationServiceImpl.addParticipation(participationModel);
 			redirectAttributes.addFlashAttribute("success", true);
