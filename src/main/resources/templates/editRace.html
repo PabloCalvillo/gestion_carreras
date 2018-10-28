@@ -62,7 +62,7 @@
 				</div>
 				<div class="card-body">
 					<div th:if="${success eq true}">
-						<div class="alert alert-primary" role="alert">Carrera
+						<div class="alert alert-primary" role="alert">Participación
 							añadida con éxito</div>
 					</div>
 					<div th:if="${success eq false}">
@@ -122,9 +122,9 @@
 							<td><span th:text="${participation.coche}">Coche</span></td>
 							<td><span th:text="${participation.posicion}">Posición</span></td>
 							<td><input type="text" name="id"
-								th:value=${participation.id} class="hidden" />
-								<input type="text" name="carrera"
-								th:value=${participation.carrera} class="hidden" />
+								th:value=${participation.id} class="hidden" /> <input
+								type="text" name="carrera" th:value=${participation.carrera}
+								class="hidden" />
 								<button type="submit">
 									<i class="fas fa-trash-alt"></i>
 								</button></td>
@@ -135,6 +135,51 @@
 		</div>
 	</div>
 	<!-- .editParticipation -->
+
+	<div class="contenedor card border-secondary mb-3">
+		<form action="#" th:action="@{/races/updateRace}" th:object="${race}"
+			method="post">
+			<div class=" carDates card-header">
+				<button id="editCar">
+					<i class="fas fa-pen-square"></i>
+				</button>
+				<h1>Editar Carrera:</h1>
+			</div>
+			<div class="card-body">
+				<div th:if="${successEdit eq true}">
+					<div class="alert alert-primary" role="alert">Carrera
+						editada con éxito</div>
+				</div>
+				<div th:if="${successEdit eq false}">
+					<div class="alert alert-danger" role="alert">Algo ha salido
+						mal</div>
+				</div>
+				<div class="form-group">
+					<div>
+						<input type="text" name="id" hidden th:value="${race.id}"
+							th:field="*{id}" />
+					</div>
+					<label for="nombre">Nombre: </label> <input type="text"
+						class="form-control" name="marca" th:value="${race.nombre}"
+						th:field="*{nombre}" required readonly />
+				</div>
+				<div class="form-group">
+					<label for="ciudad">Ciudad: </label> <input type="text"
+						class="form-control inputDisable" name="modelo"
+						th:value="${race.ciudad}" th:field="*{ciudad}" required readonly />
+				</div>
+				<div class="form-group">
+					<label for="fecha">Fecha: </label> <input type="date"
+						class="form-control inputDisable" name="fecha"
+						th:value="${race.fecha}" th:field="*{fecha}" required readonly />
+				</div>
+				<div>
+					<input type="submit" class="btn btn-primary button"
+						value="Editar carrera" />
+				</div>
+			</div>
+		</form>
+	</div>
 
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

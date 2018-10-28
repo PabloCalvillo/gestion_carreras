@@ -67,9 +67,16 @@ public class CarController {
 	}
 
 	@PostMapping("/updateCar")
-	public String updateCar(@ModelAttribute("car") CarModel carModel) {
-		carServiceImpl.updateCar(carModel);
-		return "redirect:/cars/listCars";
+	public String updateCar(@ModelAttribute("car") CarModel carModel, RedirectAttributes redirectAttributes) {
+		try {
+			carServiceImpl.addCar(carModel);
+			redirectAttributes.addFlashAttribute("successEdit", true);
+			
+		} catch (Exception e) {
+			redirectAttributes.addFlashAttribute("successEdit", false);
+			return "redirect:/cars/editCar?matricula=" + carModel.getMatricula();
+		}
+		return "redirect:/cars/editCar?matricula=" + carModel.getMatricula();
 	}
 
 	@GetMapping("/editCar")

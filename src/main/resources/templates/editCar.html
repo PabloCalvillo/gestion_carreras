@@ -62,7 +62,7 @@
 				</div>
 				<div class="card-body">
 					<div th:if="${success eq true}">
-						<div class="alert alert-primary" role="alert">Carrera
+						<div class="alert alert-primary" role="alert">Participación
 							añadida con éxito</div>
 					</div>
 					<div th:if="${success eq false}">
@@ -79,7 +79,7 @@
 							class="custom-select custom-select-lg mb-3" th:field="*{carrera}">
 							<option value="">Seleccione una carrera</option>
 							<option th:each="race: ${races}" th:value="${race.nombre}"
-								th:text="${race.nombre}"></option>
+								th:text="${race.nombre} + ' (' + ${race.fecha} + ')'"></option>
 						</select>
 					</div>
 					<div class="form-group">
@@ -122,9 +122,9 @@
 							<td><span th:text="${participation.posicion}">Posición</span></td>
 							<td><span th:text="${participation.fecha}">Fecha</span></td>
 							<td><input type="text" name="id"
-								th:value=${participation.id} class="hidden" />
-								<input type="text" name="coche"
-								th:value=${participation.coche} class="hidden" />
+								th:value=${participation.id} class="hidden" /> <input
+								type="text" name="coche" th:value=${participation.coche}
+								class="hidden" />
 								<button type="submit">
 									<i class="fas fa-trash-alt"></i>
 								</button></td>
@@ -143,16 +143,25 @@
 				<button id="editCar">
 					<i class="fas fa-pen-square"></i>
 				</button>
-				<h1 class="dateCar">Editar Coche:</h1>
-				<h1 th:text="${car.matricula}"></h1>
+				<h1>Editar Coche</h1>
 			</div>
 			<div class="card-body">
-				<div class="form-group">
-					<div>
-						<input type="text" name="matricula" hidden th:value="${car.marca}"
-							th:field="*{matricula}" /> <input type="text" name="matricula"
-							hidden th:value="${car.id}" th:field="*{id}" />
+			<div th:if="${successEdit eq true}">
+						<div class="alert alert-primary" role="alert">Coche
+							editado con éxito</div>
 					</div>
+					<div th:if="${successEdit eq false}">
+						<div class="alert alert-danger" role="alert">Algo ha salido
+							mal</div>
+					</div>
+				<div class="form-group">
+					<input type="text" name="id" hidden th:value="${car.id}"
+						th:field="*{id}" /> <label for="marca">Matrícula: </label> <input
+						type="text" class="form-control" name="matricula"
+						th:value="${car.matricula}" th:field="*{matricula}" required
+						readonly />
+				</div>
+				<div class="form-group">
 					<label for="marca">Marca: </label> <input type="text"
 						class="form-control" name="marca" th:value="${car.marca}"
 						th:field="*{marca}" required readonly />

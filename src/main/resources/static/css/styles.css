@@ -32,11 +32,6 @@ video {
 	left: 50%;
 }
 
-.dateCar {
-	float: left;
-	padding-right: 10px;
-}
-
 .carDates button {
 	float: right;
 }

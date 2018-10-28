@@ -53,11 +53,21 @@ public class RaceController {
 			redirectAttributes.addFlashAttribute("success", true);
 		} catch(Exception e) {
 			redirectAttributes.addFlashAttribute("success", false);
-			return "redirect:/races/add";
-			
+			return "redirect:/races/add";	
 		}
-		
 		return "redirect:/races/add";
+	}
+	
+	@PostMapping("/updateRace")
+	public String updateRace(@ModelAttribute("race") RaceModel raceModel, RedirectAttributes redirectAttributes) {
+		try {
+			raceServiceImpl.addRace(raceModel);
+			redirectAttributes.addFlashAttribute("successEdit", true);
+		} catch(Exception e) {
+			redirectAttributes.addFlashAttribute("successEdit", false);
+			return "redirect:/races/editRace?id=" + raceModel.getId();	
+		}
+		return "redirect:/races/editRace?id=" + raceModel.getId();
 	}
 
 	@GetMapping("/edit")
