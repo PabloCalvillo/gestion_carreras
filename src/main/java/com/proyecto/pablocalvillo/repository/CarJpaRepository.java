@@ -10,6 +10,7 @@ import com.proyecto.pablocalvillo.entity.Car;
 @Repository("carJpaRepository")
 public interface CarJpaRepository extends JpaRepository<Car, Serializable> {
 	
-	public Car findByMatricula(String matricula);
+	public abstract Car findByMatricula(String matricula);
 	
+	public abstract Car findById(int id);
 }

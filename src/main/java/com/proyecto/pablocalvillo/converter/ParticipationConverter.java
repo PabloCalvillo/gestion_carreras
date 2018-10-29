@@ -8,7 +8,6 @@ import org.springframework.stereotype.Component;
 import com.proyecto.pablocalvillo.entity.Participation;
 import com.proyecto.pablocalvillo.model.ParticipationModel;
 import com.proyecto.pablocalvillo.repository.CarJpaRepository;
-import com.proyecto.pablocalvillo.repository.QueryDSLCar;
 import com.proyecto.pablocalvillo.repository.QueryDSLRace;
 import com.proyecto.pablocalvillo.repository.RaceJpaRepository;
 
@@ -27,20 +26,16 @@ public class ParticipationConverter {
 	private CarJpaRepository carJpaRepository;
 	
 	@Autowired
-	@Qualifier("queryDSLCar")
-	private QueryDSLCar queryDSLCar;
-	
-	@Autowired
 	@Qualifier("queryDSLRace")
 	private QueryDSLRace queryDSLRace;
 	
 	public ParticipationModel entity2model(Participation participation) {
 		ParticipationModel participationModel = new ParticipationModel();
 		participationModel.setId(participation.getId());
-		participationModel.setCarrera(queryDSLRace.find(participation.getIdCarrera()).getNombre());
-		participationModel.setCoche(queryDSLCar.find(participation.getIdCoche()).getMatricula());
+		participationModel.setCarrera(raceJpaRepository.findById(participation.getIdCarrera()).getNombre());
+		participationModel.setCoche(carJpaRepository.findById(participation.getIdCoche()).getMatricula());
 		participationModel.setPosicion(participation.getPosicion());
-		participationModel.setFecha(raceJpaRepository.findById(participation.getIdCarrera()).get().getFecha());
+		participationModel.setFecha(raceJpaRepository.findById(participation.getIdCarrera()).getFecha());
 		return participationModel;
 	}
 	

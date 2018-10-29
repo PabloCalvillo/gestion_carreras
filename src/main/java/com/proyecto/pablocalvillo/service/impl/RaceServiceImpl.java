@@ -56,7 +56,7 @@ public class RaceServiceImpl implements RaceService {
 
 	@Override
 	public Race findById(int id) {
-		return queryDSLRace.find(id);
+		return raceJpaRepository.findById(id);
 	}
 
 	@Override

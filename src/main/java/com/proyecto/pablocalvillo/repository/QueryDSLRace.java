@@ -19,13 +19,6 @@ public class QueryDSLRace {
 	@PersistenceContext
 	private EntityManager em;
 	
-	public Race find(int id) {
-		
-		JPAQuery<Race> query = new JPAQuery<Race>(em);
-		
-		return query.select(qrace).from(qrace).where(qrace.id.eq(id)).fetchOne();
-	}
-	
 	public Date getDate(int id) {
 		
 		JPAQuery<Race> query = new JPAQuery<Race>(em);

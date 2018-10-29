@@ -10,5 +10,6 @@ import com.proyecto.pablocalvillo.entity.Race;
 @Repository("raceJpaRepository")
 public interface RaceJpaRepository extends JpaRepository<Race, Serializable> {
 	
-	public Race findByNombre(String nombre);
+	public abstract Race findByNombre(String nombre);
+	public abstract Race findById(int id);
 }
