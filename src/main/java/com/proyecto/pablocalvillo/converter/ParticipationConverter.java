@@ -41,7 +41,7 @@ public class ParticipationConverter {
 	
 	public Participation model2entity(ParticipationModel participationModel) {
 		Participation participation = new Participation();
-		participation.setId(participation.getId());
+		participation.setId(participationModel.getId());
 		participation.setIdCarrera((raceJpaRepository.findByNombre(participationModel.getCarrera()).getId()));
 		participation.setIdCoche(carJpaRepository.findByMatricula(participationModel.getCoche()).getId());
 		participation.setPosicion(participationModel.getPosicion());
