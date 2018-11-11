@@ -1,10 +1,11 @@
 package com.proyecto.pablocalvillo.model;
 
+import org.springframework.web.multipart.MultipartFile;
+
 public class CarModel {
 	
 	private int id, potencia;
-	private String marca, modelo, matricula, color;
-	private String foto;
+	private String marca, modelo, matricula, color, foto;
 	
 	public CarModel() {
 		super();

@@ -40,7 +40,8 @@
 						<a class="dropdown-item" href="/races/add">Añadir carrera</a> <a
 							class="dropdown-item" href="/races/edit">Gestionar carreras</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="/participation/listAllParticipations">Gestionar
+						<a class="dropdown-item"
+							href="/participation/listAllParticipations">Gestionar
 							participaciones</a>
 					</div></li>
 			</ul>
@@ -53,7 +54,7 @@
 	</nav>
 	<div class="addCar contenedor card border-secondary mb-3">
 		<form action="#" th:action="@{/cars/addCar}" th:object="${car}"
-			method="post">
+			method="post" enctype="multipart/form-data">
 			<div class="card-header">
 				<h1>Añadir Coche</h1>
 			</div>
@@ -88,6 +89,9 @@
 					<label for="color">Color: </label> <input type="text"
 						class="form-control" name="color" th:field="*{color}" required />
 				</div>
+				<div class="form-group">
+					<label>FOTO</label> <input type="file" name="file"/>
+				</div>
 				<div>
 					<input type="submit" class="btn btn-primary button"
 						value="Guardar coche" />
@@ -95,6 +99,8 @@
 			</div>
 
 		</form>
+
+
 	</div>
 	<!-- .addCar -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

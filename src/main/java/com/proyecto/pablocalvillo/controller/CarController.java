@@ -10,12 +10,14 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyecto.pablocalvillo.model.CarModel;
 import com.proyecto.pablocalvillo.model.ParticipationModel;
 import com.proyecto.pablocalvillo.service.impl.CarServiceImpl;
+import com.proyecto.pablocalvillo.service.impl.FileServiceImpl;
 import com.proyecto.pablocalvillo.service.impl.ParticipationServiceImpl;
 import com.proyecto.pablocalvillo.service.impl.RaceServiceImpl;
 
@@ -39,6 +41,10 @@ public class CarController {
 	@Qualifier("participationServiceImpl")
 	ParticipationServiceImpl participationServiceImpl;
 	
+	@Autowired
+	@Qualifier("fileServiceImpl")
+	FileServiceImpl fileServiceImpl;
+	
 	@GetMapping("/listCars")
 	public ModelAndView listAllCars() {
 		ModelAndView mav = new ModelAndView(EDIT_CARS_VIEW);
@@ -54,8 +60,9 @@ public class CarController {
 	}
 
 	@PostMapping("/addCar")
-	public String addCar(@ModelAttribute("car") CarModel carModel, RedirectAttributes redirectAttributes) {
+	public String addCar(@ModelAttribute("car") CarModel carModel, @ModelAttribute("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 		try {
+			carModel.setFoto(fileServiceImpl.saveFile(file));
 			carServiceImpl.addCar(carModel);
 			redirectAttributes.addFlashAttribute("success", true);
 			
