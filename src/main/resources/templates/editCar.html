@@ -57,10 +57,9 @@
 		<div class="row"
 			style="display: flex; justify-content: center; align-items: center;">
 			<div class="col-sm-8" style="padding-right: 0;">
-				<img th:src="@{/files/} + ${car.foto}" style="max-width: 100%;" />
+				<img th:src="@{/files/} + ${ car.foto != null ? car.foto : 'imagendefecto.png'}" style="max-width: 100%;" />
 			</div>
-			<div class="col-sm-4"
-				style="text-align: center; padding-left: 0;">
+			<div class="col-sm-4" style="text-align: center; padding-left: 0;">
 				<h3 th:text="${car.marca}"></h3>
 				<h4 th:text="${car.modelo}"></h4>
 				<h3>Potencia</h3>
