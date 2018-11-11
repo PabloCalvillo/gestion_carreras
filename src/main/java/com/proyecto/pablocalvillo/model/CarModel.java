@@ -1,7 +1,5 @@
 package com.proyecto.pablocalvillo.model;
 
-import org.springframework.web.multipart.MultipartFile;
-
 public class CarModel {
 	
 	private int id, potencia;
