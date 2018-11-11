@@ -53,6 +53,27 @@
 			</form>
 		</div>
 	</nav>
+	<div class="contenedor card border-secondary mb-3">
+		<div class="row"
+			style="display: flex; justify-content: center; align-items: center;">
+			<div class="col-sm-8" style="padding-right: 0;">
+				<img th:src="@{/files/} + ${car.foto}" style="max-width: 100%;" />
+			</div>
+			<div class="col-sm-4"
+				style="text-align: center; padding-left: 0;">
+				<h3 th:text="${car.marca}"></h3>
+				<h4 th:text="${car.modelo}"></h4>
+				<h3>Potencia</h3>
+				<h4 th:text="${car.potencia}"></h4>
+				<h3>Matrícula</h3>
+				<h4 th:text="${car.matricula}"></h4>
+				<h3>Color</h3>
+				<h4 th:text="${car.color}"></h4>
+			</div>
+
+		</div>
+
+	</div>
 	<div class="addParticipations clearfix">
 		<div class="addParticipation contenedor card border-secondary mb-3">
 			<form action="#" th:action="@{/participation/addParticipationCar}"
