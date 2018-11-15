@@ -22,5 +22,11 @@ public class FileServiceImpl {
 		}
 		return "";
 	}
+	
+	public void removeFile(String name) throws IOException {
+		
+		Path fileToDelete = Paths.get(upload_folder + name);
+		Files.delete(fileToDelete);
+	}
 
 }

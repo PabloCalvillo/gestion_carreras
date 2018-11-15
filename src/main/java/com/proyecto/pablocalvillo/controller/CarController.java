@@ -1,5 +1,6 @@
 package com.proyecto.pablocalvillo.controller;
 
+import java.io.IOException;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyecto.pablocalvillo.model.CarModel;
 import com.proyecto.pablocalvillo.model.ParticipationModel;
+import com.proyecto.pablocalvillo.repository.QueryDSLCar;
 import com.proyecto.pablocalvillo.service.impl.CarServiceImpl;
 import com.proyecto.pablocalvillo.service.impl.FileServiceImpl;
 import com.proyecto.pablocalvillo.service.impl.ParticipationServiceImpl;
@@ -44,6 +46,10 @@ public class CarController {
 	@Autowired
 	@Qualifier("fileServiceImpl")
 	FileServiceImpl fileServiceImpl;
+	
+	@Autowired
+	@Qualifier("queryDSLCar")
+	QueryDSLCar queryDSLCar;
 	
 	@GetMapping("/listCars")
 	public ModelAndView listAllCars() {
@@ -105,6 +111,13 @@ public class CarController {
 	@GetMapping("/removeCar")
 	public String removeCar(
 			@RequestParam(name = "matricula", required = true, defaultValue = "NULL") String matricula) {
+		if(queryDSLCar.getFoto(matricula) != "") {
+			try {
+				fileServiceImpl.removeFile(queryDSLCar.getFoto(matricula));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
 		carServiceImpl.removeCar(matricula);
 		return "redirect:/cars/listCars";
 	}
