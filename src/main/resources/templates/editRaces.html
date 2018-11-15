@@ -46,50 +46,57 @@
 							participaciones</a>
 					</div></li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0">
+			<form class="form-inline my-2 my-lg-0" th:action="@{/races/find}">
 				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
+					placeholder="Ciudad carrera" aria-label="Search">
 				<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
 			</form>
 		</div>
 	</nav>
-	<div id="editRaces clearfix">
-		<div class="editRace contenedor card border-secondary mb-3">
-			<div class="card-header">
-				<h1>Carreras</h1>
-			</div>
-			<div class="card-body">
-				<table class="table">
-					<thead class="thead-light">
-						<tr>
-							<th scope="col">Nombre</th>
-							<th scope="col">Ciudad</th>
-							<th scope="col">Fecha</th>
-							<th scope="col">Gestionar / Eliminar</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="race: ${races}">
-							<form action="#" th:action="@{/races/removeRace}" method="get">
-								<td><span th:text="${race.nombre}">Nombre</span></td>
-								<td><span th:text="${race.ciudad}">Ciudad</span></td>
-								<td><span th:text="${race.fecha}">Fecha</span></td>
-								<td><input type="text" name="id" th:value=${race.id}
-									class="hidden" />
-								<button th:formaction="@{/races/editRace}" type="submit">
-										<i class="fas fa-edit"></i>
-									</button>
-									<button type="submit">
-										<i class="fas fa-trash-alt"></i>
-									</button></td>
-							</form>
-						</tr>
-					</tbody>
-				</table>
+	<div class="contenedor">
+		<div id="clearfix">
+			<div class="card border-secondary mb-3">
+				<div class="card-header">
+					<h1>Carreras</h1>
+				</div>
+				<div class="card-body">
+					<table class="table">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">Nombre</th>
+								<th scope="col">Ciudad</th>
+								<th scope="col">Fecha</th>
+								<th scope="col">Gestionar / Eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="race: ${races}">
+								<form action="#" th:action="@{/races/removeRace}" method="get">
+									<td><span th:text="${race.nombre}">Nombre</span></td>
+									<td><span th:text="${race.ciudad}">Ciudad</span></td>
+									<td><span th:text="${race.fecha}">Fecha</span></td>
+									<td><input type="text" name="id" th:value=${race.id}
+										class="hidden" />
+										<button th:formaction="@{/races/editRace}" type="submit">
+											<i class="fas fa-edit"></i>
+										</button>
+										<button type="submit">
+											<i class="fas fa-trash-alt"></i>
+										</button></td>
+								</form>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
-		<!-- .editRace -->
 	</div>
+	<footer class="site-footer">
+		<p>&copy Todos los derechos reservados</p>
+		<p>
+			<i class="fas fa-user"></i>Pablo Calvillo
+		</p>
+	</footer>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>

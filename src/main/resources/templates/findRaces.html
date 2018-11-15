@@ -10,7 +10,7 @@
 	href="https://use.fontawesome.com/releases/v5.4.1/css/all.css"
 	integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz"
 	crossorigin="anonymous">
-<title>Fórmula 1/ Carreras</title>
+<title>Formula 1/ Carreras</title>
 </head>
 <body>
 	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
@@ -28,7 +28,8 @@
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"> Coches </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+					<div class="dropdown-menu navbar-light"
+						aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="/cars/add">Añadir coche</a> <a
 							class="dropdown-item" href="/cars/listCars">Gestionar coches</a>
 					</div></li>
@@ -36,8 +37,7 @@
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"> Carreras </a>
-					<div class="dropdown-menu navbar-light"
-						aria-labelledby="navbarDropdown">
+					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
 						<a class="dropdown-item" href="/races/add">Añadir carrera</a> <a
 							class="dropdown-item" href="/races/edit">Gestionar carreras</a>
 						<div class="dropdown-divider"></div>
@@ -46,51 +46,48 @@
 							participaciones</a>
 					</div></li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0">
+			<form class="form-inline my-2 my-lg-0" th:action="@{/races/find}">
 				<input class="form-control mr-sm-2" type="search"
-					placeholder="Buscar" aria-label="Search">
+					placeholder="Ciudad carrera" aria-label="Search">
 				<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
 			</form>
 		</div>
 	</nav>
 	<div class="contenedor">
-		<div class="card border-secondary mb-3">
-			<div class="card-header">
-				<h1>Coches</h1>
-			</div>
-			<div class="card-body">
-				<table class="table">
-					<thead class="thead-light">
-						<tr>
-							<th scope="col">Marca</th>
-							<th scope="col">Modelo</th>
-							<th scope="col">Potencia</th>
-							<th scope="col">Color</th>
-							<th scope="col">Matrícula</th>
-							<th scope="col">Gestionar / Eliminar</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr th:each="car: ${cars}">
-							<form action="#" th:action="@{/cars/removeCar}" method="get">
-								<td><span th:text="${car.marca}">Marca</span></td>
-								<td><span th:text="${car.modelo}">Modelo</span></td>
-								<td><span th:text="${car.potencia}">Potencia</span></td>
-								<td><span th:text="${car.color}">Color</span></td>
-								<td><span th:text="${car.matricula}"
-									th:value=${car.matricula}>Matrícula</span></td>
-								<td><input type="text" name="matricula"
-									th:value=${car.matricula} class="hidden" />
-									<button th:formaction="@{/cars/editCar}" type="submit">
-										<i class="fas fa-edit"></i>
-									</button>
-									<button type="submit">
-										<i class="fas fa-trash-alt"></i>
-									</button></td>
-							</form>
-						</tr>
-					</tbody>
-				</table>
+		<div id="clearfix">
+			<div class="card border-secondary mb-3">
+				<div class="card-header">
+					<h1>Carreras</h1>
+				</div>
+				<div class="card-body">
+					<table class="table">
+						<thead class="thead-light">
+							<tr>
+								<th scope="col">Nombre</th>
+								<th scope="col">Ciudad</th>
+								<th scope="col">Fecha</th>
+								<th scope="col">Gestionar / Eliminar</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="race: ${races}">
+								<form action="#" th:action="@{/races/removeRace}" method="get">
+									<td><span th:text="${race.nombre}">Nombre</span></td>
+									<td><span th:text="${race.ciudad}">Ciudad</span></td>
+									<td><span th:text="${race.fecha}">Fecha</span></td>
+									<td><input type="text" name="id" th:value=${race.id}
+										class="hidden" />
+										<button th:formaction="@{/races/editRace}" type="submit">
+											<i class="fas fa-edit"></i>
+										</button>
+										<button type="submit">
+											<i class="fas fa-trash-alt"></i>
+										</button></td>
+								</form>
+							</tr>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>

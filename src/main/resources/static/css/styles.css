@@ -4,6 +4,7 @@ body {
 	font-family: 'Montserrat', sans-serif;
 	padding-top: 4.5rem;
 	box-sizing: border-box;
+	height: 100% !important;
 }
 
 .bodyIndex {
@@ -11,19 +12,30 @@ body {
 	margin-bottom: 0;
 }
 
-.site-footer, .site-header {
-	background-color: #353535;
-	padding-top: 30px;
+.site-footer {
+	background-color: #222;
+	padding-top: 5px;
+	margin-top: 30px;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
+	align-items: : center;
+
 }
 
-.video {
-	overflow-x: hidden;
-	position: absolute;
+.site-footer p {
+	color: #ffffff;
+	margin: 0;
+	padding: 10px;
+	text-align: center;
 }
 
-video {
-	max-height: 100% !important;
-	max-width: 100% !important;
+.site-footer p:last-child {
+	padding-top: 0;
+}
+
+.site-footer p i {
+	margin: 0;
 }
 
 .buttonIndex {
@@ -38,11 +50,6 @@ video {
 
 h2 {
 	padding: 20px;
-}
-
-.editCar:first-child {
-	margin-right: 10px;
-	float: left;
 }
 
 .header {
@@ -72,6 +79,7 @@ h2 {
 	width: 70%;
 	margin: 0 auto;
 	margin-top: 1.5em;
+	height: 100% !important;
 }
 
 @media ( max-width : 900px) {

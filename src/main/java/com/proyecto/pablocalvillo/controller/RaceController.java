@@ -26,6 +26,7 @@ public class RaceController {
 	private static final String ADD_RACES_VIEW = "addRace";
 	private static final String EDIT_RACES_VIEW = "editRaces";
 	private static final String EDIT_RACE_VIEW = "editRace";
+	private static final String FIND_RACES_VIEW = "findRaces";
 
 	@Autowired
 	@Qualifier("raceServiceImpl")
@@ -98,6 +99,13 @@ public class RaceController {
 	public String removeParticipation(@RequestParam Map<String, String> requestParams) throws Exception {
 		participationServiceImpl.removeParticipation(Integer.parseInt(requestParams.get("id")));
 		return "redirect:/races/editRace?id=" + raceServiceImpl.findByName(requestParams.get("carrera")).getId();
+	}
+	
+	@GetMapping("/find")
+	public ModelAndView findCity(@RequestParam(name = "ciudad", required = true, defaultValue = "NULL") String ciudad) {
+		ModelAndView mav = new ModelAndView(FIND_RACES_VIEW);
+		mav.addObject("races", raceServiceImpl.findByCiudad(ciudad));
+		return mav;
 	}
 
 }

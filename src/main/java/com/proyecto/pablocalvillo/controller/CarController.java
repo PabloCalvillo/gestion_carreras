@@ -74,8 +74,13 @@ public class CarController {
 	}
 
 	@PostMapping("/updateCar")
-	public String updateCar(@ModelAttribute("car") CarModel carModel, RedirectAttributes redirectAttributes) {
+	public String updateCar(@ModelAttribute("car") CarModel carModel, @ModelAttribute("file") MultipartFile file, RedirectAttributes redirectAttributes) {
 		try {
+			if(!file.isEmpty()) {
+				carModel.setFoto(fileServiceImpl.saveFile(file));
+			} else {
+				carModel.setFoto(carServiceImpl.findByMatricula(carModel.getMatricula()).getFoto());
+			}
 			carServiceImpl.addCar(carModel);
 			redirectAttributes.addFlashAttribute("successEdit", true);
 			

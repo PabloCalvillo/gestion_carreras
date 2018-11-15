@@ -53,11 +53,14 @@
 			</form>
 		</div>
 	</nav>
-	<div class="contenedor card border-secondary mb-3">
+	<div class="contenedor">
+	<div class="card border-secondary mb-3">
 		<div class="row"
 			style="display: flex; justify-content: center; align-items: center;">
 			<div class="col-sm-8" style="padding-right: 0;">
-				<img th:src="@{/files/} + ${ car.foto != null ? car.foto : 'imagendefecto.png'}" style="min-width: 100%;" />
+				<img
+					th:src="@{/files/} + ${ car.foto != null ? car.foto : 'imagendefecto.png'}"
+					style="max-width: 100%;" />
 			</div>
 			<div class="col-sm-4" style="text-align: center; padding-left: 0;">
 				<h3 th:text="${car.marca}"></h3>
@@ -73,8 +76,8 @@
 		</div>
 
 	</div>
-	<div class="addParticipations clearfix">
-		<div class="addParticipation contenedor card border-secondary mb-3">
+	<div class="clearfix">
+		<div class="addParticipation card border-secondary mb-3">
 			<form action="#" th:action="@{/participation/addParticipationCar}"
 				th:object="${participation}" method="post">
 				<div class="card-header">
@@ -117,10 +120,8 @@
 
 			</form>
 		</div>
-		<!-- .addParticipation -->
 	</div>
-	<!-- .addParticipations -->
-	<div class="editParticipation contenedor card border-secondary mb-3">
+	<div class="editParticipation card border-secondary mb-3">
 		<div class="card-header">
 			<h1>Carreras</h1>
 		</div>
@@ -156,9 +157,9 @@
 	</div>
 	<!-- .editParticipation -->
 
-	<div class="contenedor card border-secondary mb-3">
+	<div class="card border-secondary mb-3">
 		<form action="#" th:action="@{/cars/updateCar}" th:object="${car}"
-			method="post">
+			method="post" enctype="multipart/form-data">
 			<div class=" carDates card-header">
 				<button id="editCar">
 					<i class="fas fa-pen-square"></i>
@@ -203,9 +204,8 @@
 						th:value="${car.color}" th:field="*{color}" required readonly />
 				</div>
 				<div class="form-group">
-					<label for="imagen">Imagen: </label> <input type="text"
-						class="form-control inputDisable" name="color"
-						th:value="${car.foto}" readonly />
+					<label for="file">Imagen: </label> <input type="file"
+						class="form-control inputDisable" name="file" />
 				</div>
 				<div>
 					<input type="submit" class="btn btn-primary button"
@@ -214,6 +214,13 @@
 			</div>
 		</form>
 	</div>
+	</div>
+	<footer class="site-footer">
+		<p>&copy Todos los derechos reservados</p>
+		<p>
+			<i class="fas fa-user"></i>Pablo Calvillo
+		</p>
+	</footer>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>

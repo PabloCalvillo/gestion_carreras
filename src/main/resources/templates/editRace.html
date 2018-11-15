@@ -46,15 +46,11 @@
 							participaciones</a>
 					</div></li>
 			</ul>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
-			</form>
 		</div>
 	</nav>
-	<div class="addParticipations clearfix">
-		<div class="addParticipation contenedor card border-secondary mb-3">
+	<div class="contenedor">
+	<div class="clearfix">
+		<div class="card border-secondary mb-3">
 			<form action="#" th:action="@{/participation/addParticipationRace}"
 				th:object="${participation}" method="post">
 				<div class="card-header">
@@ -97,10 +93,8 @@
 
 			</form>
 		</div>
-		<!-- .addParticipation -->
 	</div>
-	<!-- .addParticipations -->
-	<div class="editParticipation contenedor card border-secondary mb-3">
+	<div class="card border-secondary mb-3">
 		<div class="card-header">
 			<h1>Carreras</h1>
 		</div>
@@ -134,9 +128,7 @@
 			</table>
 		</div>
 	</div>
-	<!-- .editParticipation -->
-
-	<div class="contenedor card border-secondary mb-3">
+	<div class="card border-secondary mb-3">
 		<form action="#" th:action="@{/races/updateRace}" th:object="${race}"
 			method="post">
 			<div class=" carDates card-header">
@@ -147,8 +139,8 @@
 			</div>
 			<div class="card-body">
 				<div th:if="${successEdit eq true}">
-					<div class="alert alert-primary" role="alert">Carrera
-						editada con éxito</div>
+					<div class="alert alert-primary" role="alert">Carrera editada
+						con éxito</div>
 				</div>
 				<div th:if="${successEdit eq false}">
 					<div class="alert alert-danger" role="alert">Algo ha salido
@@ -180,7 +172,13 @@
 			</div>
 		</form>
 	</div>
-
+	</div>
+	<footer class="site-footer">
+		<p>&copy Todos los derechos reservados</p>
+		<p>
+			<i class="fas fa-user"></i>Pablo Calvillo
+		</p>
+	</footer>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>

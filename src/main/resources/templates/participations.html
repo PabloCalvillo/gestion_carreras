@@ -40,52 +40,60 @@
 						<a class="dropdown-item" href="/races/add">Añadir carrera</a> <a
 							class="dropdown-item" href="/races/edit">Gestionar carreras</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="/participation/listAllParticipations">Gestionar
+						<a class="dropdown-item"
+							href="/participation/listAllParticipations">Gestionar
 							participaciones</a>
 					</div></li>
 			</ul>
 			<form class="form-inline my-2 my-lg-0">
 				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
+					placeholder="Buscar" aria-label="Search">
 				<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
 			</form>
 		</div>
 	</nav>
-	<div class="editParticipation contenedor card border-secondary mb-3">
-		<div class="card-header">
-			<h1>Participaciones</h1>
-		</div>
-		<div class="card-body">
-			<table class="table">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">Carrera</th>
-						<th scope="col">Coche</th>
-						<th scope="col">Posición</th>
-						<th scope="col">Fecha</th>
-						<th scope="col">Eliminar</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="participation: ${participations}">
-						<form action="#" th:action="@{/participation/removeParticipation}"
-							method="get">
-							<td><span th:text="${participation.carrera}">Carrera</span></td>
-							<td><span th:text="${participation.coche}">Coche</span></td>
-							<td><span th:text="${participation.posicion}">Posición</span></td>
-							<td><span th:text="${participation.fecha}">Fecha</span></td>
-							<td><input type="text" name="id"
-								th:value=${participation.id} class="hidden" />
-								<button type="submit">
-									<i class="fas fa-trash-alt"></i>
-								</button></td>
-						</form>
-					</tr>
-				</tbody>
-			</table>
+	<div class="contenedor">
+		<div class="card border-secondary mb-3">
+			<div class="card-header">
+				<h1>Participaciones</h1>
+			</div>
+			<div class="card-body">
+				<table class="table">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Carrera</th>
+							<th scope="col">Coche</th>
+							<th scope="col">Posición</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="participation: ${participations}">
+							<form action="#"
+								th:action="@{/participation/removeParticipation}" method="get">
+								<td><span th:text="${participation.carrera}">Carrera</span></td>
+								<td><span th:text="${participation.coche}">Coche</span></td>
+								<td><span th:text="${participation.posicion}">Posición</span></td>
+								<td><span th:text="${participation.fecha}">Fecha</span></td>
+								<td><input type="text" name="id"
+									th:value=${participation.id} class="hidden" />
+									<button type="submit">
+										<i class="fas fa-trash-alt"></i>
+									</button></td>
+							</form>
+						</tr>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
-	<!-- .editParticipation -->
+	<footer class="site-footer">
+		<p>&copy Todos los derechos reservados</p>
+		<p>
+			<i class="fas fa-user"></i>Pablo Calvillo
+		</p>
+	</footer>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
