@@ -112,11 +112,13 @@ public class CarController {
 	public String removeCar(
 			@RequestParam(name = "matricula", required = true, defaultValue = "NULL") String matricula) {
 		if(queryDSLCar.getFoto(matricula) != "") {
-			try {
-				fileServiceImpl.removeFile(queryDSLCar.getFoto(matricula));
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+			
+				try {
+					fileServiceImpl.removeFile(queryDSLCar.getFoto(matricula));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
 		}
 		carServiceImpl.removeCar(matricula);
 		return "redirect:/cars/listCars";
