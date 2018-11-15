@@ -68,15 +68,20 @@ public class CarController {
 	@PostMapping("/addCar")
 	public String addCar(@ModelAttribute("car") CarModel carModel, @ModelAttribute("file") MultipartFile file,
 			RedirectAttributes redirectAttributes) {
-		try {
-			carModel.setFoto(fileServiceImpl.saveFile(file));
+			if(carServiceImpl.findByMatricula(carModel.getMatricula()) == null) {
+				try {
+					carModel.setFoto(fileServiceImpl.saveFile(file));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			carServiceImpl.addCar(carModel);
 			redirectAttributes.addFlashAttribute("success", true);
+			} else {
+				redirectAttributes.addFlashAttribute("success", false);
+				return "redirect:/cars/add";
+				
+			}
 
-		} catch (Exception e) {
-			redirectAttributes.addFlashAttribute("success", false);
-			return "redirect:/cars/add";
-		}
 		return "redirect:/cars/add";
 	}
 
