@@ -41,54 +41,57 @@
 						<a class="dropdown-item" href="/races/add">Añadir carrera</a> <a
 							class="dropdown-item" href="/races/edit">Gestionar carreras</a>
 						<div class="dropdown-divider"></div>
-						<a class="dropdown-item" href="/participation/listAllParticipations">Gestionar
+						<a class="dropdown-item"
+							href="/participation/listAllParticipations">Gestionar
 							participaciones</a>
 					</div></li>
 			</ul>
 		</div>
 	</nav>
 	<div class="contenedor">
-	<div class="clearfix">
-		<div class="addRace card border-secondary mb-3">
-			<form action="#" th:action="@{/races/addRace}" th:object="${race}"
-				method="post">
-				<div class="card-header">
-					<h1>Añadir Carrera</h1>
-				</div>
-				<div th:if="${success eq true}">
-					<div class="alert alert-primary" role="alert">Carrera añadida
-						con éxito</div>
-				</div>
-				<div th:if="${success eq false}">
-					<div class="alert alert-danger" role="alert">Algo ha salido
-						mal</div>
-				</div>
-				<div class="card-body">
-					<div class="form-group">
-						<label for="marca">Nombre: </label> <input type="text"
-							class="form-control" name="nombre" th:field="*{nombre}" required />
+		<div class="clearfix">
+			<div class="addRace card border-secondary mb-3">
+				<form action="#" th:action="@{/races/addRace}" th:object="${race}"
+					method="post">
+					<div class="card-header">
+						<h1>Añadir Carrera</h1>
 					</div>
-					<div class="form-group">
-						<label for="modelo">Ciudad: </label> <input type="text"
-							class="form-control" name="ciudad" th:field="*{ciudad}" required />
+					<div th:if="${success eq true}">
+						<div class="alert alert-primary" role="alert">Carrera
+							añadida con éxito</div>
 					</div>
-					<div class="form-group">
-						<label for="potencia">Fecha: </label> <input type="date"
-							class="form-control" name="fecha" th:field="*{fecha}" required />
+					<div th:if="${success eq false}">
+						<div class="alert alert-danger" role="alert">El nombre de la
+							carrera ya existe</div>
 					</div>
-					<div>
-						<input type="submit" class="btn btn-primary button"
-							value="Guardar carrera" />
+					<div class="card-body">
+						<div class="form-group">
+							<label for="marca">Nombre: </label> <input type="text"
+								class="form-control" name="nombre" th:field="*{nombre}" required />
+						</div>
+						<div class="form-group">
+							<label for="modelo">Ciudad: </label> <input type="text"
+								class="form-control" name="ciudad" th:field="*{ciudad}" required />
+						</div>
+						<div class="form-group">
+							<label for="potencia">Fecha: </label> <input type="date"
+								class="form-control" name="fecha" th:field="*{fecha}" required />
+						</div>
+						<div>
+							<input type="submit" class="btn btn-primary button"
+								value="Guardar carrera" />
+						</div>
 					</div>
-				</div>
 
-			</form>
+				</form>
+			</div>
 		</div>
-	</div>
 	</div>
 	<footer class="site-footer">
 		<p>&copy Todos los derechos reservados</p>
-		<p><i class="fas fa-user"></i>Pablo Calvillo</p>
+		<p>
+			<i class="fas fa-user"></i>Pablo Calvillo
+		</p>
 	</footer>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"

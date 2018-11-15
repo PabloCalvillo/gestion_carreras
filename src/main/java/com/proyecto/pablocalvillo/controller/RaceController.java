@@ -31,11 +31,11 @@ public class RaceController {
 	@Autowired
 	@Qualifier("raceServiceImpl")
 	private RaceServiceImpl raceServiceImpl;
-	
+
 	@Autowired
 	@Qualifier("carServiceImpl")
 	private CarServiceImpl carServiceImpl;
-	
+
 	@Autowired
 	@Qualifier("participationServiceImpl")
 	ParticipationServiceImpl participationServiceImpl;
@@ -48,25 +48,25 @@ public class RaceController {
 	}
 
 	@PostMapping("/addRace")
-	public String addRace(@ModelAttribute("race") RaceModel raceModel, 	RedirectAttributes redirectAttributes) {
-		try {
+	public String addRace(@ModelAttribute("race") RaceModel raceModel, RedirectAttributes redirectAttributes) {
+		if (raceServiceImpl.findByName(raceModel.getNombre()) == null) {
 			raceServiceImpl.addRace(raceModel);
 			redirectAttributes.addFlashAttribute("success", true);
-		} catch(Exception e) {
+		} else {
 			redirectAttributes.addFlashAttribute("success", false);
-			return "redirect:/races/add";	
+			return "redirect:/races/add";
 		}
 		return "redirect:/races/add";
 	}
-	
+
 	@PostMapping("/updateRace")
 	public String updateRace(@ModelAttribute("race") RaceModel raceModel, RedirectAttributes redirectAttributes) {
 		try {
 			raceServiceImpl.addRace(raceModel);
 			redirectAttributes.addFlashAttribute("successEdit", true);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("successEdit", false);
-			return "redirect:/races/editRace?id=" + raceModel.getId();	
+			return "redirect:/races/editRace?id=" + raceModel.getId();
 		}
 		return "redirect:/races/editRace?id=" + raceModel.getId();
 	}
@@ -83,10 +83,9 @@ public class RaceController {
 		raceServiceImpl.removeRace(id);
 		return "redirect:/races/edit";
 	}
-	
+
 	@GetMapping("/editRace")
-	public ModelAndView editRace(
-			@RequestParam(name = "id", required = true, defaultValue = "NULL") int id) {
+	public ModelAndView editRace(@RequestParam(name = "id", required = true, defaultValue = "NULL") int id) {
 		ModelAndView mav = new ModelAndView(EDIT_RACE_VIEW);
 		mav.addObject("race", raceServiceImpl.findById(id));
 		mav.addObject("participations", participationServiceImpl.listRaceParticipations(id));
@@ -94,13 +93,13 @@ public class RaceController {
 		mav.addObject("cars", carServiceImpl.listAllCars());
 		return mav;
 	}
-	
+
 	@GetMapping("/removeParticipation")
 	public String removeParticipation(@RequestParam Map<String, String> requestParams) throws Exception {
 		participationServiceImpl.removeParticipation(Integer.parseInt(requestParams.get("id")));
 		return "redirect:/races/editRace?id=" + raceServiceImpl.findByName(requestParams.get("carrera")).getId();
 	}
-	
+
 	@GetMapping("/find")
 	public ModelAndView findCity(@RequestParam(name = "ciudad", required = true, defaultValue = "NULL") String ciudad) {
 		ModelAndView mav = new ModelAndView(FIND_RACES_VIEW);
