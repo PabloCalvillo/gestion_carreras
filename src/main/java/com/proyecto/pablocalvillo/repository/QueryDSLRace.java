@@ -26,5 +26,23 @@ public class QueryDSLRace {
 		return query.select(qrace).from(qrace).where(qrace.ciudad.eq(ciudad)).where(qrace.fecha.eq(fecha)).fetchOne();
 		// return (Date) query.select(qrace.fecha).from(qrace).where(qrace.id.eq(id)).fetchOne();
 	}
+	
+	public String getName(int id) {
+		JPAQuery<Race> query = new JPAQuery<Race>(em);
+		
+		return query.select(qrace.nombre).from(qrace).where(qrace.id.eq(id)).fetchOne();
+	}
+	
+	public int getId(String name) {
+		JPAQuery<Race> query = new JPAQuery<Race>(em);
+		
+		return query.select(qrace.id).from(qrace).where(qrace.nombre.eq(name)).fetchOne();
+	}
+	
+	public Date getFecha(int id) {
+		JPAQuery<Race> query = new JPAQuery<Race>(em);
+		
+		return query.select(qrace.fecha).from(qrace).where(qrace.id.eq(id)).fetchOne();
+	}
 
 }

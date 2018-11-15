@@ -59,7 +59,7 @@
 			style="display: flex; justify-content: center; align-items: center;">
 			<div class="col-sm-8" style="padding-right: 0;">
 				<img
-					th:src="@{/files/} + ${ car.foto != null ? car.foto : 'imagendefecto.png'}"
+					th:src="@{/files/} + ${ car.foto != '' ? car.foto : 'imagendefecto.png'}"
 					style="max-width: 100%;" />
 			</div>
 			<div class="col-sm-4" style="text-align: center; padding-left: 0;">

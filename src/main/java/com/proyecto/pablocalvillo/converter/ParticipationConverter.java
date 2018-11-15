@@ -32,17 +32,17 @@ public class ParticipationConverter {
 	public ParticipationModel entity2model(Participation participation) {
 		ParticipationModel participationModel = new ParticipationModel();
 		participationModel.setId(participation.getId());
-		participationModel.setCarrera(raceJpaRepository.findById(participation.getIdCarrera()).getNombre());
+		participationModel.setCarrera(queryDSLRace.getName(participation.getIdCarrera()));
 		participationModel.setCoche(carJpaRepository.findById(participation.getIdCoche()).getMatricula());
 		participationModel.setPosicion(participation.getPosicion());
-		participationModel.setFecha(raceJpaRepository.findById(participation.getIdCarrera()).getFecha());
+		participationModel.setFecha(queryDSLRace.getFecha(participation.getIdCarrera()));
 		return participationModel;
 	}
 	
 	public Participation model2entity(ParticipationModel participationModel) {
 		Participation participation = new Participation();
 		participation.setId(participationModel.getId());
-		participation.setIdCarrera((raceJpaRepository.findByNombre(participationModel.getCarrera()).getId()));
+		participation.setIdCarrera(queryDSLRace.getId(participationModel.getCarrera()));
 		participation.setIdCoche(carJpaRepository.findByMatricula(participationModel.getCoche()).getId());
 		participation.setPosicion(participationModel.getPosicion());
 		return participation;
