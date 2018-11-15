@@ -38,19 +38,19 @@ public class CarController {
 	@Autowired
 	@Qualifier("carServiceImpl")
 	private CarServiceImpl carServiceImpl;
-	
+
 	@Autowired
 	@Qualifier("participationServiceImpl")
 	ParticipationServiceImpl participationServiceImpl;
-	
+
 	@Autowired
 	@Qualifier("fileServiceImpl")
 	FileServiceImpl fileServiceImpl;
-	
+
 	@Autowired
 	@Qualifier("queryDSLCar")
 	QueryDSLCar queryDSLCar;
-	
+
 	@GetMapping("/listCars")
 	public ModelAndView listAllCars() {
 		ModelAndView mav = new ModelAndView(EDIT_CARS_VIEW);
@@ -66,12 +66,13 @@ public class CarController {
 	}
 
 	@PostMapping("/addCar")
-	public String addCar(@ModelAttribute("car") CarModel carModel, @ModelAttribute("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+	public String addCar(@ModelAttribute("car") CarModel carModel, @ModelAttribute("file") MultipartFile file,
+			RedirectAttributes redirectAttributes) {
 		try {
 			carModel.setFoto(fileServiceImpl.saveFile(file));
 			carServiceImpl.addCar(carModel);
 			redirectAttributes.addFlashAttribute("success", true);
-			
+
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("success", false);
 			return "redirect:/cars/add";
@@ -80,16 +81,18 @@ public class CarController {
 	}
 
 	@PostMapping("/updateCar")
-	public String updateCar(@ModelAttribute("car") CarModel carModel, @ModelAttribute("file") MultipartFile file, RedirectAttributes redirectAttributes) {
+	public String updateCar(@ModelAttribute("car") CarModel carModel, @ModelAttribute("file") MultipartFile file,
+			RedirectAttributes redirectAttributes) {
 		try {
-			if(!file.isEmpty()) {
+			if (!file.isEmpty()) {
+				fileServiceImpl.removeFile(queryDSLCar.getFoto(carModel.getMatricula()));
 				carModel.setFoto(fileServiceImpl.saveFile(file));
 			} else {
-				carModel.setFoto(carServiceImpl.findByMatricula(carModel.getMatricula()).getFoto());
+				carModel.setFoto(queryDSLCar.getFoto(carModel.getMatricula()));
 			}
 			carServiceImpl.addCar(carModel);
 			redirectAttributes.addFlashAttribute("successEdit", true);
-			
+
 		} catch (Exception e) {
 			redirectAttributes.addFlashAttribute("successEdit", false);
 			return "redirect:/cars/editCar?matricula=" + carModel.getMatricula();
@@ -111,19 +114,13 @@ public class CarController {
 	@GetMapping("/removeCar")
 	public String removeCar(
 			@RequestParam(name = "matricula", required = true, defaultValue = "NULL") String matricula) {
-		if(queryDSLCar.getFoto(matricula) != "") {
-			
-				try {
-					fileServiceImpl.removeFile(queryDSLCar.getFoto(matricula));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
-			
+		if (queryDSLCar.getFoto(matricula) != "") {
+			fileServiceImpl.removeFile(queryDSLCar.getFoto(matricula));
 		}
 		carServiceImpl.removeCar(matricula);
 		return "redirect:/cars/listCars";
 	}
-	
+
 	@GetMapping("/removeParticipation")
 	public String removeParticipation(@RequestParam Map<String, String> requestParams) throws Exception {
 		participationServiceImpl.removeParticipation(Integer.parseInt(requestParams.get("id")));
