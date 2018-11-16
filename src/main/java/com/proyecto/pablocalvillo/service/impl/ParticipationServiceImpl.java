@@ -44,19 +44,15 @@ public class ParticipationServiceImpl implements ParticipationService {
 	
 	@Override
 	public List<ParticipationModel> listParticipations(String matricula) {
-		List<ParticipationModel> participationsModel = new ArrayList<ParticipationModel>();
-		participationJpaRepository.findByidCoche(carJpaRepository.findByMatricula(matricula).getId()).forEach(participation -> {
-			participationsModel.add(participationConverter.entity2model(participation));
-		});;
+		List<ParticipationModel> participationsModel = participationJpaRepository.findByidCoche(carJpaRepository.findByMatricula(matricula).getId())
+				.stream().map(participation -> participationConverter.entity2model(participation)).collect(Collectors.toList());
 		return participationsModel;
 	}
 	
 	@Override
 	public List<ParticipationModel> listRaceParticipations(int idCarrera) {
-		List<ParticipationModel> participationsModel = new ArrayList<ParticipationModel>();
-		participationJpaRepository.findByidCarrera(idCarrera).forEach(participation -> {
-			participationsModel.add(participationConverter.entity2model(participation));
-		});
+		List<ParticipationModel> participationsModel = participationJpaRepository.findByidCarrera(idCarrera)
+				.stream().map(participation -> participationConverter.entity2model(participation)).collect(Collectors.toList());
 		return participationsModel;
 	}
 
