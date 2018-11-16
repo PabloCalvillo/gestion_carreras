@@ -2,6 +2,7 @@ package com.proyecto.pablocalvillo.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -31,10 +32,8 @@ public class RaceServiceImpl implements RaceService {
 
 	@Override
 	public List<RaceModel> listAllRaces() {
-		List<RaceModel> racesModel = new ArrayList<RaceModel>();
-		raceJpaRepository.findAll().forEach(race -> {
-			racesModel.add(raceConverter.entity2model(race));
-		});
+		List<RaceModel> racesModel = raceJpaRepository.findAll().stream()
+				.map(race -> raceConverter.entity2model(race)).collect(Collectors.toList());
 		return racesModel;
 	}
 

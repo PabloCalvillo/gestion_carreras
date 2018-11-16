@@ -1,7 +1,7 @@
 package com.proyecto.pablocalvillo.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,10 +26,8 @@ public class CarServiceImpl implements CarService {
 
 	@Override
 	public List<CarModel> listAllCars() {
-		List<CarModel> carsModel = new ArrayList<CarModel>();
-		carJpaRepository.findAll().forEach(car -> {
-			carsModel.add(carConverter.entity2model(car));
-		});
+		List<CarModel> carsModel = carJpaRepository.findAll().stream()
+				.map(car -> carConverter.entity2model(car)).collect(Collectors.toList());
 		return carsModel;
 	}
 

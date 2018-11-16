@@ -2,6 +2,7 @@ package com.proyecto.pablocalvillo.service.impl;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -36,10 +37,8 @@ public class ParticipationServiceImpl implements ParticipationService {
 
 	@Override
 	public List<ParticipationModel> listAllParticipations() {
-		List<ParticipationModel> participationsModel = new ArrayList<ParticipationModel>();
-		participationJpaRepository.findAll().forEach(participation -> {
-			participationsModel.add(participationConverter.entity2model(participation));
-		});
+		List<ParticipationModel> participationsModel = participationJpaRepository.findAll().stream()
+				.map(participation -> participationConverter.entity2model(participation)).collect(Collectors.toList());
 		return participationsModel;
 	}
 	
