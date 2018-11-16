@@ -22,7 +22,8 @@
 						th:src="@{/files/} + ${ car.foto != '' ? car.foto : 'imagendefecto.png'}"
 						style="max-width: 100%;" />
 				</div>
-				<div class="col-sm-4" style="text-align: center !important; padding-left: 20px;">
+				<div class="col-sm-4"
+					style="text-align: center !important; padding-left: 20px;">
 					<div class="card bg-light mb-3">
 						<div class="card-header">Coche</div>
 						<div class="card-body">
@@ -196,6 +197,10 @@
 					</div>
 				</div>
 			</form>
+		</div>
+		<div>
+			<a href="/cars/listCars" class="btn btn-primary button"
+				style="float: right;">Ir al listado de coches</a>
 		</div>
 	</div>
 	<footer th:replace="fragments/footer :: footer"> </footer>
