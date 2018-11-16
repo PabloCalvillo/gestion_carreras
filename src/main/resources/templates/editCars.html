@@ -15,7 +15,10 @@
 <body>
 	<nav th:replace="fragments/navbar :: navbar"></nav>
 	<div class="contenedor">
-		<div class="card border-secondary mb-3">
+	<div th:if="${cars.size()} <= 0">
+					<div class="alert alert-danger" role="alert">No hay coches en este momento</div>
+				</div>
+		<div th:if="${cars.size()} > 0" class="card border-secondary mb-3">
 			<div class="card-header">
 				<h1>Coches</h1>
 			</div>

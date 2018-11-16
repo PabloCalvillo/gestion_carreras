@@ -26,10 +26,11 @@
 						con éxito</div>
 				</div>
 				<div th:if="${success eq false}">
-					<div class="alert alert-danger" role="alert">La matrícula ya existe</div>
+					<div class="alert alert-danger" role="alert">La matrícula ya
+						existe</div>
 				</div>
 				<div class="card-body">
-				<div class="form-group">
+					<div class="form-group">
 						<label for="matricula">Matrícula: </label> <input type="text"
 							class="form-control" name="matricula" th:field="*{matricula}"
 							required />
@@ -60,8 +61,10 @@
 							value="Guardar coche" />
 					</div>
 				</div>
-
 			</form>
+		</div>
+		<div>
+			<a href="/cars/listCars" class="btn btn-primary button" style="float:right;">Ir al listado de coches</a>
 		</div>
 	</div>
 	<footer th:replace="fragments/footer :: footer"></footer>

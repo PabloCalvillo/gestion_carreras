@@ -61,10 +61,10 @@ public class RaceController {
 
 	@PostMapping("/updateRace")
 	public String updateRace(@ModelAttribute("race") RaceModel raceModel, RedirectAttributes redirectAttributes) {
-		try {
+		if (raceServiceImpl.findByName(raceModel.getNombre()) == null) {
 			raceServiceImpl.addRace(raceModel);
 			redirectAttributes.addFlashAttribute("successEdit", true);
-		} catch (Exception e) {
+		} else {
 			redirectAttributes.addFlashAttribute("successEdit", false);
 			return "redirect:/races/editRace?id=" + raceModel.getId();
 		}

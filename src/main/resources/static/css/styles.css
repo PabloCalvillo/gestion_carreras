@@ -13,6 +13,10 @@ body {
 	margin-bottom: 100px;
 }
 
+img {
+	min-width: 100%;
+}
+
 .bodyIndex {
 	padding-top: 0;
 	margin-bottom: 0;

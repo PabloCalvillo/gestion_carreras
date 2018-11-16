@@ -68,19 +68,19 @@ public class CarController {
 	@PostMapping("/addCar")
 	public String addCar(@ModelAttribute("car") CarModel carModel, @ModelAttribute("file") MultipartFile file,
 			RedirectAttributes redirectAttributes) {
-			if(carServiceImpl.findByMatricula(carModel.getMatricula()) == null) {
-				try {
-					carModel.setFoto(fileServiceImpl.saveFile(file));
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+		if (carServiceImpl.findByMatricula(carModel.getMatricula()) == null) {
+			try {
+				carModel.setFoto(fileServiceImpl.saveFile(file));
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			carServiceImpl.addCar(carModel);
 			redirectAttributes.addFlashAttribute("success", true);
-			} else {
-				redirectAttributes.addFlashAttribute("success", false);
-				return "redirect:/cars/add";
-				
-			}
+		} else {
+			redirectAttributes.addFlashAttribute("success", false);
+			return "redirect:/cars/add";
+
+		}
 
 		return "redirect:/cars/add";
 	}
@@ -88,21 +88,26 @@ public class CarController {
 	@PostMapping("/updateCar")
 	public String updateCar(@ModelAttribute("car") CarModel carModel, @ModelAttribute("file") MultipartFile file,
 			RedirectAttributes redirectAttributes) {
-		try {
-			if (!file.isEmpty()) {
-				fileServiceImpl.removeFile(queryDSLCar.getFoto(carModel.getMatricula()));
-				carModel.setFoto(fileServiceImpl.saveFile(file));
-			} else {
-				carModel.setFoto(queryDSLCar.getFoto(carModel.getMatricula()));
-			}
-			carServiceImpl.addCar(carModel);
-			redirectAttributes.addFlashAttribute("successEdit", true);
+		if (carServiceImpl.findByMatricula(carModel.getMatricula()) == null) {
+			try {
+				if (!file.isEmpty()) {
+					fileServiceImpl.removeFile(queryDSLCar.getFoto(carModel.getMatricula()));
+					carModel.setFoto(fileServiceImpl.saveFile(file));
+				} else {
+					carModel.setFoto(queryDSLCar.getFoto(carModel.getMatricula()));
+				}
+				carServiceImpl.addCar(carModel);
+				redirectAttributes.addFlashAttribute("successEdit", true);
 
-		} catch (Exception e) {
-			redirectAttributes.addFlashAttribute("successEdit", false);
-			return "redirect:/cars/editCar?matricula=" + carModel.getMatricula();
+			} catch (Exception e) {
+				redirectAttributes.addFlashAttribute("successEdit", false);
+				return "redirect:/cars/editCar?matricula=" + carModel.getMatricula();
+			}
+		} else {
+			redirectAttributes.addFlashAttribute("success", false);
 		}
 		return "redirect:/cars/editCar?matricula=" + carModel.getMatricula();
+
 	}
 
 	@GetMapping("/editCar")

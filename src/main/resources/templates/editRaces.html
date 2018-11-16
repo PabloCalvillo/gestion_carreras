@@ -15,40 +15,41 @@
 <body>
 	<nav th:replace="fragments/navbar :: navbar"></nav>
 	<div class="contenedor">
-		<div id="clearfix">
-			<div class="card border-secondary mb-3">
-				<div class="card-header">
-					<h1>Carreras</h1>
-				</div>
-				<div class="card-body">
-					<table class="table">
-						<thead class="thead-light">
-							<tr>
-								<th scope="col">Nombre</th>
-								<th scope="col">Ciudad</th>
-								<th scope="col">Fecha</th>
-								<th scope="col">Gestionar / Eliminar</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr th:each="race: ${races}">
-								<form action="#" th:action="@{/races/removeRace}" method="get">
-									<td><span th:text="${race.nombre}">Nombre</span></td>
-									<td><span th:text="${race.ciudad}">Ciudad</span></td>
-									<td><span th:text="${race.fecha}">Fecha</span></td>
-									<td><input type="text" name="id" th:value=${race.id}
-										class="hidden" />
-										<button th:formaction="@{/races/editRace}" type="submit">
-											<i class="fas fa-edit"></i>
-										</button>
-										<button type="submit">
-											<i class="fas fa-trash-alt"></i>
-										</button></td>
-								</form>
-							</tr>
-						</tbody>
-					</table>
-				</div>
+		<div th:if="${races.size()} <= 0">
+			<div class="alert alert-danger" role="alert">No hay carreras en este momento</div>
+		</div>
+		<div th:if="${races.size()} > 0" class="card border-secondary mb-3">
+			<div class="card-header">
+				<h1>Carreras</h1>
+			</div>
+			<div class="card-body">
+				<table class="table">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Nombre</th>
+							<th scope="col">Ciudad</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Gestionar / Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="race: ${races}">
+							<form action="#" th:action="@{/races/removeRace}" method="get">
+								<td><span th:text="${race.nombre}">Nombre</span></td>
+								<td><span th:text="${race.ciudad}">Ciudad</span></td>
+								<td><span th:text="${race.fecha}">Fecha</span></td>
+								<td><input type="text" name="id" th:value=${race.id}
+									class="hidden" />
+									<button th:formaction="@{/races/editRace}" type="submit">
+										<i class="fas fa-edit"></i>
+									</button>
+									<button type="submit">
+										<i class="fas fa-trash-alt"></i>
+									</button></td>
+							</form>
+						</tr>
+					</tbody>
+				</table>
 			</div>
 		</div>
 	</div>
