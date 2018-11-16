@@ -25,6 +25,4 @@ public class QueryDSLParticipation {
 		
 		return query.from(qparticipation).orderBy(qparticipation.idCarrera.asc(), qparticipation.posicion.asc()).fetch();
 	}
-	
-
 }

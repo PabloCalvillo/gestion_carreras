@@ -19,14 +19,6 @@ public class QueryDSLRace {
 	@PersistenceContext
 	private EntityManager em;
 	
-	public Race findByCiudadFecha(String ciudad, Date fecha) {
-		
-		JPAQuery<Race> query = new JPAQuery<Race>(em);
-		
-		return query.select(qrace).from(qrace).where(qrace.ciudad.eq(ciudad)).where(qrace.fecha.eq(fecha)).fetchOne();
-		// return (Date) query.select(qrace.fecha).from(qrace).where(qrace.id.eq(id)).fetchOne();
-	}
-	
 	public String getName(int id) {
 		JPAQuery<Race> query = new JPAQuery<Race>(em);
 		

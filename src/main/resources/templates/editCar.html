@@ -15,23 +15,39 @@
 <body>
 	<nav th:replace="fragments/navbar :: navbar"></nav>
 	<div class="contenedor">
-		<div class="card border-secondary mb-3">
-			<div class="row"
-				style="display: flex; justify-content: center; align-items: center;">
+		<div class="card border-secondary mb-3" style="border: 0;">
+			<div class="row">
 				<div class="col-sm-8" style="padding-right: 0;">
 					<img
 						th:src="@{/files/} + ${ car.foto != '' ? car.foto : 'imagendefecto.png'}"
 						style="max-width: 100%;" />
 				</div>
-				<div class="col-sm-4" style="text-align: center; padding-left: 0;">
-					<h3 th:text="${car.marca}"></h3>
-					<h4 th:text="${car.modelo}"></h4>
-					<h3>Potencia</h3>
-					<h4 th:text="${car.potencia}"></h4>
-					<h3>Matrícula</h3>
-					<h4 th:text="${car.matricula}"></h4>
-					<h3>Color</h3>
-					<h4 th:text="${car.color}"></h4>
+				<div class="col-sm-4" style="text-align: center !important; padding-left: 20px;">
+					<div class="card bg-light mb-3">
+						<div class="card-header">Coche</div>
+						<div class="card-body">
+							<h5 class="card-title" th:text="${car.marca}"></h5>
+							<p class="card-text" th:text="${car.modelo}"></p>
+						</div>
+					</div>
+					<div class="card bg-light mb-3">
+						<div class="card-header">Potencia</div>
+						<div class="card-body">
+							<h5 th:text="${car.potencia}"></h5>
+						</div>
+					</div>
+					<div class="card bg-light mb-3">
+						<div class="card-header">Matrícula</div>
+						<div class="card-body">
+							<h5 class="card-title" th:text="${car.matricula}"></h5>
+						</div>
+					</div>
+					<div class="card bg-light mb-3">
+						<div class="card-header">Color</div>
+						<div class="card-body">
+							<h5 class="card-title" th:text="${car.color}"></h5>
+						</div>
+					</div>
 				</div>
 
 			</div>
@@ -84,9 +100,11 @@
 			</div>
 		</div>
 		<div th:if="${participations.size()} <= 0">
-			<div class="alert alert-danger" role="alert">No hay carreras en este momento</div>
+			<div class="alert alert-danger" role="alert">No hay carreras en
+				este momento</div>
 		</div>
-		<div th:if="${participations.size()} > 0" class="editParticipation card border-secondary mb-3">
+		<div th:if="${participations.size()} > 0"
+			class="editParticipation card border-secondary mb-3">
 			<div class="card-header">
 				<h1>Carreras</h1>
 			</div>
@@ -137,7 +155,8 @@
 							con éxito</div>
 					</div>
 					<div th:if="${successEdit eq false}">
-						<div class="alert alert-danger" role="alert">La matrícula ya existe</div>
+						<div class="alert alert-danger" role="alert">La matrícula ya
+							existe</div>
 					</div>
 					<div class="form-group">
 						<input type="text" name="id" hidden th:value="${car.id}"
@@ -148,13 +167,13 @@
 					</div>
 					<div class="form-group">
 						<label for="marca">Marca: </label> <input type="text"
-							class="form-control inputDisable" name="marca" th:value="${car.marca}"
-							th:field="*{marca}" required readonly />
+							class="form-control inputDisable" name="marca"
+							th:value="${car.marca}" th:field="*{marca}" required readonly />
 					</div>
 					<div class="form-group">
 						<label for="modelo">Modelo: </label> <input type="text"
-							class="form-control inputDisable" name="modelo" th:value="${car.modelo}"
-							th:field="*{modelo}" required readonly />
+							class="form-control inputDisable" name="modelo"
+							th:value="${car.modelo}" th:field="*{modelo}" required readonly />
 					</div>
 					<div class="form-group">
 						<label for="potencia">Potencia: </label> <input type="number"
