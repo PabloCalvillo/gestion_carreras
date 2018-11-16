@@ -13,214 +13,171 @@
 <title>Fórmula 1/ Editar coche</title>
 </head>
 <body>
-	<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-		<a class="navbar-brand" href="/index">Fórmula 1</a>
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#navbarSupportedContent"
-			aria-controls="navbarSupportedContent" aria-expanded="false"
-			aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
-
-		<div class="collapse navbar-collapse" id="navbarSupportedContent">
-			<ul class="navbar-nav mr-auto">
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Coches </a>
-					<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="/cars/add">Añadir coche</a> <a
-							class="dropdown-item" href="/cars/listCars">Gestionar coches</a>
-					</div></li>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"> Carreras </a>
-					<div class="dropdown-menu navbar-light"
-						aria-labelledby="navbarDropdown">
-						<a class="dropdown-item" href="/races/add">Añadir carrera</a> <a
-							class="dropdown-item" href="/races/edit">Gestionar carreras</a>
-						<div class="dropdown-divider"></div>
-						<a class="dropdown-item"
-							href="/participation/listAllParticipations">Gestionar
-							participaciones</a>
-					</div></li>
-			</ul>
-			<form class="form-inline my-2 my-lg-0">
-				<input class="form-control mr-sm-2" type="search"
-					placeholder="Search" aria-label="Search">
-				<button class="btn btn-outline-light my-2 my-sm-0" type="submit">Buscar</button>
-			</form>
-		</div>
-	</nav>
+	<nav th:replace="fragments/navbar :: navbar"></nav>
 	<div class="contenedor">
-	<div class="card border-secondary mb-3">
-		<div class="row"
-			style="display: flex; justify-content: center; align-items: center;">
-			<div class="col-sm-8" style="padding-right: 0;">
-				<img
-					th:src="@{/files/} + ${ car.foto != '' ? car.foto : 'imagendefecto.png'}"
-					style="max-width: 100%;" />
-			</div>
-			<div class="col-sm-4" style="text-align: center; padding-left: 0;">
-				<h3 th:text="${car.marca}"></h3>
-				<h4 th:text="${car.modelo}"></h4>
-				<h3>Potencia</h3>
-				<h4 th:text="${car.potencia}"></h4>
-				<h3>Matrícula</h3>
-				<h4 th:text="${car.matricula}"></h4>
-				<h3>Color</h3>
-				<h4 th:text="${car.color}"></h4>
+		<div class="card border-secondary mb-3">
+			<div class="row"
+				style="display: flex; justify-content: center; align-items: center;">
+				<div class="col-sm-8" style="padding-right: 0;">
+					<img
+						th:src="@{/files/} + ${ car.foto != '' ? car.foto : 'imagendefecto.png'}"
+						style="max-width: 100%;" />
+				</div>
+				<div class="col-sm-4" style="text-align: center; padding-left: 0;">
+					<h3 th:text="${car.marca}"></h3>
+					<h4 th:text="${car.modelo}"></h4>
+					<h3>Potencia</h3>
+					<h4 th:text="${car.potencia}"></h4>
+					<h3>Matrícula</h3>
+					<h4 th:text="${car.matricula}"></h4>
+					<h3>Color</h3>
+					<h4 th:text="${car.color}"></h4>
+				</div>
+
 			</div>
 
 		</div>
+		<div class="clearfix">
+			<div class="addParticipation card border-secondary mb-3">
+				<form action="#" th:action="@{/participation/addParticipationCar}"
+					th:object="${participation}" method="post">
+					<div class="card-header">
+						<h1>Registrar Carrera</h1>
+					</div>
+					<div class="card-body">
+						<div th:if="${success eq true}">
+							<div class="alert alert-primary" role="alert">Participación
+								añadida con éxito</div>
+						</div>
+						<div th:if="${success eq false}">
+							<div class="alert alert-danger" role="alert">Algo ha salido
+								mal</div>
+						</div>
+						<div class="form-group">
+							<label for="coche">Coche: </label> <input type="text"
+								class="form-control" name="coche" th:value="${car.matricula}"
+								readonly />
+						</div>
+						<div class="form-group">
+							<label for="carrera">Carrera: </label> <select
+								class="custom-select custom-select-lg mb-3"
+								th:field="*{carrera}">
+								<option value="">Seleccione una carrera</option>
+								<option th:each="race: ${races}" th:value="${race.nombre}"
+									th:text="${race.nombre} + ' (' + ${race.fecha} + ')'"></option>
+							</select>
+						</div>
+						<div class="form-group">
+							<div class="input-group mb-3">
+								<label class="input-group-text" for="posicion">Posición
+								</label> <input type="number" min=0 class="form-control" name="posicion"
+									th:field="*{posicion}" required />
+							</div>
+						</div>
+						<div>
+							<input type="submit" class="btn btn-primary button"
+								value="Guardar participación" />
+						</div>
+					</div>
 
-	</div>
-	<div class="clearfix">
-		<div class="addParticipation card border-secondary mb-3">
-			<form action="#" th:action="@{/participation/addParticipationCar}"
-				th:object="${participation}" method="post">
-				<div class="card-header">
-					<h1>Registrar Carrera</h1>
+				</form>
+			</div>
+		</div>
+		<div class="editParticipation card border-secondary mb-3">
+			<div class="card-header">
+				<h1>Carreras</h1>
+			</div>
+			<div class="card-body">
+				<table class="table">
+					<thead class="thead-light">
+						<tr>
+							<th scope="col">Carrera</th>
+							<th scope="col">Posición</th>
+							<th scope="col">Fecha</th>
+							<th scope="col">Eliminar</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr th:each="participation: ${participations}">
+							<form action="#" th:action="@{/cars/removeParticipation}"
+								method="get">
+								<td><span th:text="${participation.carrera}">Carrera</span></td>
+								<td><span th:text="${participation.posicion}">Posición</span></td>
+								<td><span th:text="${participation.fecha}">Fecha</span></td>
+								<td><input type="text" name="id"
+									th:value=${participation.id} class="hidden" /> <input
+									type="text" name="coche" th:value=${participation.coche}
+									class="hidden" />
+									<button type="submit">
+										<i class="fas fa-trash-alt"></i>
+									</button></td>
+							</form>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+		<!-- .editParticipation -->
+
+		<div class="card border-secondary mb-3">
+			<form action="#" th:action="@{/cars/updateCar}" th:object="${car}"
+				method="post" enctype="multipart/form-data">
+				<div class=" carDates card-header">
+					<button id="editCar">
+						<i class="fas fa-pen-square"></i>
+					</button>
+					<h1>Editar Coche</h1>
 				</div>
 				<div class="card-body">
-					<div th:if="${success eq true}">
-						<div class="alert alert-primary" role="alert">Participación
-							añadida con éxito</div>
+					<div th:if="${successEdit eq true}">
+						<div class="alert alert-primary" role="alert">Coche editado
+							con éxito</div>
 					</div>
-					<div th:if="${success eq false}">
+					<div th:if="${successEdit eq false}">
 						<div class="alert alert-danger" role="alert">Algo ha salido
 							mal</div>
 					</div>
 					<div class="form-group">
-						<label for="coche">Coche: </label> <input type="text"
-							class="form-control" name="coche" th:value="${car.matricula}"
+						<input type="text" name="id" hidden th:value="${car.id}"
+							th:field="*{id}" /> <label for="marca">Matrícula: </label> <input
+							type="text" class="form-control" name="matricula"
+							th:value="${car.matricula}" th:field="*{matricula}" required
 							readonly />
 					</div>
 					<div class="form-group">
-						<label for="carrera">Carrera: </label> <select
-							class="custom-select custom-select-lg mb-3" th:field="*{carrera}">
-							<option value="">Seleccione una carrera</option>
-							<option th:each="race: ${races}" th:value="${race.nombre}"
-								th:text="${race.nombre} + ' (' + ${race.fecha} + ')'"></option>
-						</select>
+						<label for="marca">Marca: </label> <input type="text"
+							class="form-control" name="marca" th:value="${car.marca}"
+							th:field="*{marca}" required readonly />
 					</div>
 					<div class="form-group">
-						<div class="input-group mb-3">
-							<label class="input-group-text" for="posicion">Posición </label>
-							<input type="number" min=0 class="form-control" name="posicion"
-								th:field="*{posicion}" required />
-						</div>
+						<label for="modelo">Modelo: </label> <input type="text"
+							class="form-control" name="modelo" th:value="${car.modelo}"
+							th:field="*{modelo}" required readonly />
+					</div>
+					<div class="form-group">
+						<label for="potencia">Potencia: </label> <input type="number"
+							class="form-control inputDisable" name="potencia"
+							th:value="${car.potencia}" th:field="*{potencia}" required
+							readonly />
+					</div>
+					<div class="form-group">
+						<label for="color">Color: </label> <input type="text"
+							class="form-control inputDisable" name="color"
+							th:value="${car.color}" th:field="*{color}" required readonly />
+					</div>
+					<div class="form-group">
+						<label for="file">Imagen: </label> <input type="file"
+							class="form-control inputDisable" name="file" />
 					</div>
 					<div>
 						<input type="submit" class="btn btn-primary button"
-							value="Guardar participación" />
+							value="Editar coche" />
 					</div>
 				</div>
-
 			</form>
 		</div>
 	</div>
-	<div class="editParticipation card border-secondary mb-3">
-		<div class="card-header">
-			<h1>Carreras</h1>
-		</div>
-		<div class="card-body">
-			<table class="table">
-				<thead class="thead-light">
-					<tr>
-						<th scope="col">Carrera</th>
-						<th scope="col">Posición</th>
-						<th scope="col">Fecha</th>
-						<th scope="col">Eliminar</th>
-					</tr>
-				</thead>
-				<tbody>
-					<tr th:each="participation: ${participations}">
-						<form action="#" th:action="@{/cars/removeParticipation}"
-							method="get">
-							<td><span th:text="${participation.carrera}">Carrera</span></td>
-							<td><span th:text="${participation.posicion}">Posición</span></td>
-							<td><span th:text="${participation.fecha}">Fecha</span></td>
-							<td><input type="text" name="id"
-								th:value=${participation.id} class="hidden" /> <input
-								type="text" name="coche" th:value=${participation.coche}
-								class="hidden" />
-								<button type="submit">
-									<i class="fas fa-trash-alt"></i>
-								</button></td>
-						</form>
-					</tr>
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<!-- .editParticipation -->
-
-	<div class="card border-secondary mb-3">
-		<form action="#" th:action="@{/cars/updateCar}" th:object="${car}"
-			method="post" enctype="multipart/form-data">
-			<div class=" carDates card-header">
-				<button id="editCar">
-					<i class="fas fa-pen-square"></i>
-				</button>
-				<h1>Editar Coche</h1>
-			</div>
-			<div class="card-body">
-				<div th:if="${successEdit eq true}">
-					<div class="alert alert-primary" role="alert">Coche editado
-						con éxito</div>
-				</div>
-				<div th:if="${successEdit eq false}">
-					<div class="alert alert-danger" role="alert">Algo ha salido
-						mal</div>
-				</div>
-				<div class="form-group">
-					<input type="text" name="id" hidden th:value="${car.id}"
-						th:field="*{id}" /> <label for="marca">Matrícula: </label> <input
-						type="text" class="form-control" name="matricula"
-						th:value="${car.matricula}" th:field="*{matricula}" required
-						readonly />
-				</div>
-				<div class="form-group">
-					<label for="marca">Marca: </label> <input type="text"
-						class="form-control" name="marca" th:value="${car.marca}"
-						th:field="*{marca}" required readonly />
-				</div>
-				<div class="form-group">
-					<label for="modelo">Modelo: </label> <input type="text"
-						class="form-control" name="modelo" th:value="${car.modelo}"
-						th:field="*{modelo}" required readonly />
-				</div>
-				<div class="form-group">
-					<label for="potencia">Potencia: </label> <input type="number"
-						class="form-control inputDisable" name="potencia"
-						th:value="${car.potencia}" th:field="*{potencia}" required
-						readonly />
-				</div>
-				<div class="form-group">
-					<label for="color">Color: </label> <input type="text"
-						class="form-control inputDisable" name="color"
-						th:value="${car.color}" th:field="*{color}" required readonly />
-				</div>
-				<div class="form-group">
-					<label for="file">Imagen: </label> <input type="file"
-						class="form-control inputDisable" name="file" />
-				</div>
-				<div>
-					<input type="submit" class="btn btn-primary button"
-						value="Editar coche" />
-				</div>
-			</div>
-		</form>
-	</div>
-	</div>
-	<footer class="site-footer">
-		<p>&copy Todos los derechos reservados</p>
-		<p>
-			<i class="fas fa-user"></i>Pablo Calvillo
-		</p>
-	</footer>
+	<footer th:replace="fragments/footer :: footer"> </footer>
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
 		crossorigin="anonymous"></script>
