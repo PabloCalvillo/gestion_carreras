@@ -16,7 +16,8 @@
 	<nav th:replace="fragments/navbar :: navbar"></nav>
 	<div class="contenedor">
 		<div th:if="${races.size()} <= 0">
-			<div class="alert alert-danger" role="alert">No hay carreras en este momento</div>
+			<div class="alert alert-danger" role="alert">No hay carreras en
+				este momento</div>
 		</div>
 		<div th:if="${races.size()} > 0" class="card border-secondary mb-3">
 			<div class="card-header">
@@ -51,6 +52,10 @@
 					</tbody>
 				</table>
 			</div>
+		</div>
+		<div>
+			<a href="/races/add" class="btn btn-primary button"
+				style="float: right;">Añadir carrera</a>
 		</div>
 	</div>
 	<footer th:replace="fragments/footer :: footer"></footer>

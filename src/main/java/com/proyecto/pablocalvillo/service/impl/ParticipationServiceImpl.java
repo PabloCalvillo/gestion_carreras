@@ -12,6 +12,7 @@ import com.proyecto.pablocalvillo.entity.Participation;
 import com.proyecto.pablocalvillo.model.ParticipationModel;
 import com.proyecto.pablocalvillo.repository.CarJpaRepository;
 import com.proyecto.pablocalvillo.repository.ParticipationJpaRepository;
+import com.proyecto.pablocalvillo.repository.QueryDSLParticipation;
 import com.proyecto.pablocalvillo.repository.RaceJpaRepository;
 import com.proyecto.pablocalvillo.service.ParticipationService;
 
@@ -33,10 +34,14 @@ public class ParticipationServiceImpl implements ParticipationService {
 	@Autowired
 	@Qualifier("participationConverter")
 	private ParticipationConverter participationConverter;
+	
+	@Autowired
+	@Qualifier("queryDSLParticipation")
+	private QueryDSLParticipation queryDSLParticipation;
 
 	@Override
 	public List<ParticipationModel> listAllParticipations() {
-		List<ParticipationModel> participationsModel = participationJpaRepository.findAll().stream()
+		List<ParticipationModel> participationsModel = queryDSLParticipation.listOrder().stream()
 				.map(participation -> participationConverter.entity2model(participation)).collect(Collectors.toList());
 		return participationsModel;
 	}

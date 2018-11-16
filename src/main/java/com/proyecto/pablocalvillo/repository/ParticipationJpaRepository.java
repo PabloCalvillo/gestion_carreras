@@ -13,4 +13,5 @@ public interface ParticipationJpaRepository extends JpaRepository<Participation,
 	
 	public List<Participation> findByidCoche(int idCoche);
 	public List<Participation> findByidCarrera(int idCarrera);
+	
 }
