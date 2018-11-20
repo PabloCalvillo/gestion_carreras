@@ -2,6 +2,7 @@ package com.proyecto.pablocalvillo.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
 
 import com.proyecto.pablocalvillo.entity.Car;
 import com.proyecto.pablocalvillo.model.CarModel;

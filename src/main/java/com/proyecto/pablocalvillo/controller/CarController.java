@@ -18,10 +18,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.proyecto.pablocalvillo.model.CarModel;
 import com.proyecto.pablocalvillo.model.ParticipationModel;
 import com.proyecto.pablocalvillo.repository.QueryDSLCar;
-import com.proyecto.pablocalvillo.service.impl.CarServiceImpl;
+import com.proyecto.pablocalvillo.service.CarService;
+import com.proyecto.pablocalvillo.service.ParticipationService;
+import com.proyecto.pablocalvillo.service.RaceService;
 import com.proyecto.pablocalvillo.service.impl.FileServiceImpl;
-import com.proyecto.pablocalvillo.service.impl.ParticipationServiceImpl;
-import com.proyecto.pablocalvillo.service.impl.RaceServiceImpl;
 
 @Controller
 @RequestMapping("/cars")
@@ -33,15 +33,15 @@ public class CarController {
 
 	@Autowired
 	@Qualifier("raceServiceImpl")
-	private RaceServiceImpl raceServiceImpl;
+	private RaceService raceService;
 
 	@Autowired
 	@Qualifier("carServiceImpl")
-	private CarServiceImpl carServiceImpl;
+	private CarService carService;
 
 	@Autowired
 	@Qualifier("participationServiceImpl")
-	ParticipationServiceImpl participationServiceImpl;
+	private ParticipationService participationService;
 
 	@Autowired
 	@Qualifier("fileServiceImpl")
@@ -54,7 +54,7 @@ public class CarController {
 	@GetMapping("/listCars")
 	public ModelAndView listAllCars() {
 		ModelAndView mav = new ModelAndView(EDIT_CARS_VIEW);
-		mav.addObject("cars", carServiceImpl.listAllCars());
+		mav.addObject("cars", carService.listAllCars());
 		return mav;
 	}
 
@@ -68,13 +68,13 @@ public class CarController {
 	@PostMapping("/addCar")
 	public String addCar(@ModelAttribute("car") CarModel carModel, @ModelAttribute("file") MultipartFile file,
 			RedirectAttributes redirectAttributes) {
-		if (carServiceImpl.findByMatricula(carModel.getMatricula()) == null) {
+		if (carService.findByMatricula(carModel.getMatricula()) == null) {
 			try {
 				carModel.setFoto(fileServiceImpl.saveFile(file));
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			carServiceImpl.addCar(carModel);
+			carService.addCar(carModel);
 			redirectAttributes.addFlashAttribute("success", true);
 		} else {
 			redirectAttributes.addFlashAttribute("success", false);
@@ -88,7 +88,7 @@ public class CarController {
 	@PostMapping("/updateCar")
 	public String updateCar(@ModelAttribute("car") CarModel carModel, @ModelAttribute("file") MultipartFile file,
 			RedirectAttributes redirectAttributes) {
-		if (carServiceImpl.findByMatricula(carModel.getMatricula()) == null) {
+		if (carService.findByMatricula(carModel.getMatricula()) == null) {
 			try {
 				if (!file.isEmpty()) {
 					fileServiceImpl.removeFile(queryDSLCar.getFoto(carModel.getMatricula()));
@@ -96,7 +96,7 @@ public class CarController {
 				} else {
 					carModel.setFoto(queryDSLCar.getFoto(carModel.getMatricula()));
 				}
-				carServiceImpl.addCar(carModel);
+				carService.addCar(carModel);
 				redirectAttributes.addFlashAttribute("successEdit", true);
 
 			} catch (Exception e) {
@@ -114,10 +114,10 @@ public class CarController {
 	public ModelAndView editCar(
 			@RequestParam(name = "matricula", required = true, defaultValue = "NULL") String matricula) {
 		ModelAndView mav = new ModelAndView(EDIT_CAR_VIEW);
-		mav.addObject(carServiceImpl.findByMatricula(matricula));
-		mav.addObject("races", raceServiceImpl.listAllRaces());
+		mav.addObject(carService.findByMatricula(matricula));
+		mav.addObject("races", raceService.listAllRaces());
 		mav.addObject("participation", new ParticipationModel());
-		mav.addObject("participations", participationServiceImpl.listParticipations(matricula));
+		mav.addObject("participations", participationService.listParticipations(matricula));
 		return mav;
 	}
 
@@ -127,13 +127,13 @@ public class CarController {
 		if (queryDSLCar.getFoto(matricula) != "") {
 			fileServiceImpl.removeFile(queryDSLCar.getFoto(matricula));
 		}
-		carServiceImpl.removeCar(matricula);
+		carService.removeCar(matricula);
 		return "redirect:/cars/listCars";
 	}
 
 	@GetMapping("/removeParticipation")
 	public String removeParticipation(@RequestParam Map<String, String> requestParams) throws Exception {
-		participationServiceImpl.removeParticipation(Integer.parseInt(requestParams.get("id")));
+		participationService.removeParticipation(Integer.parseInt(requestParams.get("id")));
 		return "redirect:/cars/editCar?matricula=" + requestParams.get("coche");
 	}
 }

@@ -15,45 +15,43 @@
 <body>
 	<nav th:replace="fragments/navbar :: navbar"></nav>
 	<div class="contenedor">
-		<div class="card border-secondary mb-3" style="border: 0;">
-			<div class="row">
-				<div class="col-sm-8" style="padding-right: 0;">
-					<img
-						th:src="@{/files/} + ${ car.foto != '' ? car.foto : 'imagendefecto.png'}"
-						style="max-width: 100%;" />
-				</div>
-				<div class="col-sm-4"
-					style="text-align: center !important; padding-left: 20px;">
-					<div class="card bg-light mb-3">
-						<div class="card-header">Coche</div>
-						<div class="card-body">
-							<h5 class="card-title" th:text="${car.marca}"></h5>
-							<p class="card-text" th:text="${car.modelo}"></p>
-						</div>
-					</div>
-					<div class="card bg-light mb-3">
-						<div class="card-header">Potencia</div>
-						<div class="card-body">
-							<h5 th:text="${car.potencia}"></h5>
-						</div>
-					</div>
-					<div class="card bg-light mb-3">
-						<div class="card-header">Matrícula</div>
-						<div class="card-body">
-							<h5 class="card-title" th:text="${car.matricula}"></h5>
-						</div>
-					</div>
-					<div class="card bg-light mb-3">
-						<div class="card-header">Color</div>
-						<div class="card-body">
-							<h5 class="card-title" th:text="${car.color}"></h5>
-						</div>
-					</div>
-				</div>
+		<div class="grid-container">
+        <div class="grid-item1"><img th:src="@{/files/} + ${ car.foto != '' ? car.foto : 'imagendefecto.png'}" /></div>
+        <div class="grid-item">
+            <div class="card bg-light mb-3">
+                <div class="card-header">Coche</div>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${car.marca}"></h5>
+                    <p class="card-text" th:text="${car.modelo}"></p>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item">
+            <div class="card bg-light mb-3">
+					<div class="card-header">Potencia</div>
+					<div class="card-body">
+                    <h5 th:text="${car.potencia}"></h5>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item">
+            <div class="card bg-light mb-3">
+                <div class="card-header">Matrícula</div>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${car.matricula}"></h5>
+                </div>
+            </div>
+        </div>
+        <div class="grid-item">
+            <div class="card bg-light mb-3">
+                <div class="card-header">Color</div>
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${car.color}"></h5>
+                </div>
+            </div>
+        </div>
+    </div>
 
-			</div>
-
-		</div>
 		<div class="clearfix">
 			<div class="addParticipation card border-secondary mb-3">
 				<form action="#" th:action="@{/participation/addParticipationCar}"

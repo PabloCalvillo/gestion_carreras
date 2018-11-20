@@ -12,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyecto.pablocalvillo.model.ParticipationModel;
-import com.proyecto.pablocalvillo.service.impl.ParticipationServiceImpl;
-import com.proyecto.pablocalvillo.service.impl.RaceServiceImpl;
+import com.proyecto.pablocalvillo.service.ParticipationService;
+import com.proyecto.pablocalvillo.service.RaceService;
 
 @Controller
 @RequestMapping("/participation")
@@ -23,16 +23,16 @@ public class ParticipationController {
 	
 	@Autowired
 	@Qualifier("participationServiceImpl")
-	private ParticipationServiceImpl participationServiceImpl;
+	private ParticipationService participationService;
 	
 	@Autowired
 	@Qualifier("raceServiceImpl")
-	private RaceServiceImpl raceServiceImpl;
+	private RaceService raceService;
 	
 	@GetMapping("/listAllParticipations")
 	public ModelAndView listAllParticipations() {
 		ModelAndView mav = new ModelAndView(PARTICIPATIONS_VIEW);
-		mav.addObject("participations", participationServiceImpl.listAllParticipations());
+		mav.addObject("participations", participationService.listAllParticipations());
 		return mav;
 	}
 	
@@ -40,7 +40,7 @@ public class ParticipationController {
 	public String addParticipationCar(@ModelAttribute("participation") ParticipationModel participationModel, RedirectAttributes redirectAttributes) {
 		System.out.println(participationModel);
 		try {
-			participationServiceImpl.addParticipation(participationModel);
+			participationService.addParticipation(participationModel);
 			redirectAttributes.addFlashAttribute("success", true);
 		} catch(Exception e) {
 			redirectAttributes.addFlashAttribute("success", false);
@@ -52,18 +52,18 @@ public class ParticipationController {
 	@PostMapping("/addParticipationRace")
 	public String addParticipationRace(@ModelAttribute("participation") ParticipationModel participationModel, RedirectAttributes redirectAttributes) {
 		try {
-			participationServiceImpl.addParticipation(participationModel);
+			participationService.addParticipation(participationModel);
 			redirectAttributes.addFlashAttribute("success", true);
 		} catch(Exception e) {
 			redirectAttributes.addFlashAttribute("success", false);
-			return "redirect:/races/editRace?id=" + raceServiceImpl.findByName(participationModel.getCarrera()).getId();
+			return "redirect:/races/editRace?id=" + raceService.findByName(participationModel.getCarrera()).getId();
 		}	
-		return "redirect:/races/editRace?id=" + raceServiceImpl.findByName(participationModel.getCarrera()).getId();
+		return "redirect:/races/editRace?id=" + raceService.findByName(participationModel.getCarrera()).getId();
 	}
 	
 	@GetMapping("/removeParticipation")
 	public String removeParticipation(@RequestParam(name = "id", required = true, defaultValue = "NULL") int id) {
-		participationServiceImpl.removeParticipation(id);
+		participationService.removeParticipation(id);
 		return "redirect:/participation/listAllParticipations";
 	}
 }

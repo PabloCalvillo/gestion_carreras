@@ -15,9 +15,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.proyecto.pablocalvillo.model.ParticipationModel;
 import com.proyecto.pablocalvillo.model.RaceModel;
-import com.proyecto.pablocalvillo.service.impl.CarServiceImpl;
-import com.proyecto.pablocalvillo.service.impl.ParticipationServiceImpl;
-import com.proyecto.pablocalvillo.service.impl.RaceServiceImpl;
+import com.proyecto.pablocalvillo.service.CarService;
+import com.proyecto.pablocalvillo.service.ParticipationService;
+import com.proyecto.pablocalvillo.service.RaceService;
 
 @Controller
 @RequestMapping("/races")
@@ -30,15 +30,15 @@ public class RaceController {
 
 	@Autowired
 	@Qualifier("raceServiceImpl")
-	private RaceServiceImpl raceServiceImpl;
+	private RaceService raceService;
 
 	@Autowired
 	@Qualifier("carServiceImpl")
-	private CarServiceImpl carServiceImpl;
+	private CarService carService;
 
 	@Autowired
 	@Qualifier("participationServiceImpl")
-	ParticipationServiceImpl participationServiceImpl;
+	private ParticipationService participationService;
 
 	@GetMapping("/add")
 	public ModelAndView add() {
@@ -49,8 +49,8 @@ public class RaceController {
 
 	@PostMapping("/addRace")
 	public String addRace(@ModelAttribute("race") RaceModel raceModel, RedirectAttributes redirectAttributes) {
-		if (raceServiceImpl.findByName(raceModel.getNombre()) == null) {
-			raceServiceImpl.addRace(raceModel);
+		if (raceService.findByName(raceModel.getNombre()) == null) {
+			raceService.addRace(raceModel);
 			redirectAttributes.addFlashAttribute("success", true);
 		} else {
 			redirectAttributes.addFlashAttribute("success", false);
@@ -61,8 +61,8 @@ public class RaceController {
 
 	@PostMapping("/updateRace")
 	public String updateRace(@ModelAttribute("race") RaceModel raceModel, RedirectAttributes redirectAttributes) {
-		if (raceServiceImpl.findByName(raceModel.getNombre()) == null) {
-			raceServiceImpl.addRace(raceModel);
+		if (raceService.findByName(raceModel.getNombre()) == null) {
+			raceService.addRace(raceModel);
 			redirectAttributes.addFlashAttribute("successEdit", true);
 		} else {
 			redirectAttributes.addFlashAttribute("successEdit", false);
@@ -74,36 +74,36 @@ public class RaceController {
 	@GetMapping("/edit")
 	public ModelAndView edit() {
 		ModelAndView mav = new ModelAndView(EDIT_RACES_VIEW);
-		mav.addObject("races", raceServiceImpl.listAllRaces());
+		mav.addObject("races", raceService.listAllRaces());
 		return mav;
 	}
 
 	@GetMapping("/removeRace")
 	public String removeRace(@RequestParam(name = "id", required = true, defaultValue = "NULL") int id) {
-		raceServiceImpl.removeRace(id);
+		raceService.removeRace(id);
 		return "redirect:/races/edit";
 	}
 
 	@GetMapping("/editRace")
 	public ModelAndView editRace(@RequestParam(name = "id", required = true, defaultValue = "NULL") int id) {
 		ModelAndView mav = new ModelAndView(EDIT_RACE_VIEW);
-		mav.addObject("race", raceServiceImpl.findById(id));
-		mav.addObject("participations", participationServiceImpl.listRaceParticipations(id));
+		mav.addObject("race", raceService.findById(id));
+		mav.addObject("participations", participationService.listRaceParticipations(id));
 		mav.addObject("participation", new ParticipationModel());
-		mav.addObject("cars", carServiceImpl.listAllCars());
+		mav.addObject("cars", carService.listAllCars());
 		return mav;
 	}
 
 	@GetMapping("/removeParticipation")
 	public String removeParticipation(@RequestParam Map<String, String> requestParams) throws Exception {
-		participationServiceImpl.removeParticipation(Integer.parseInt(requestParams.get("id")));
-		return "redirect:/races/editRace?id=" + raceServiceImpl.findByName(requestParams.get("carrera")).getId();
+		participationService.removeParticipation(Integer.parseInt(requestParams.get("id")));
+		return "redirect:/races/editRace?id=" + raceService.findByName(requestParams.get("carrera")).getId();
 	}
 
 	@GetMapping("/find")
 	public ModelAndView findCity(@RequestParam(name = "ciudad", required = true, defaultValue = "NULL") String ciudad) {
 		ModelAndView mav = new ModelAndView(FIND_RACES_VIEW);
-		mav.addObject("races", raceServiceImpl.findByCiudad(ciudad));
+		mav.addObject("races", raceService.findByCiudad(ciudad));
 		return mav;
 	}
 
