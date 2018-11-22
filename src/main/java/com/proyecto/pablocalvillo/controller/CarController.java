@@ -91,10 +91,10 @@ public class CarController {
 		if (carService.findByMatricula(carModel.getMatricula()) == null) {
 			try {
 				if (!file.isEmpty()) {
-					fileServiceImpl.removeFile(queryDSLCar.getFoto(carModel.getMatricula()));
+					fileServiceImpl.removeFile(queryDSLCar.getFotoId(carModel.getId()));
 					carModel.setFoto(fileServiceImpl.saveFile(file));
 				} else {
-					carModel.setFoto(queryDSLCar.getFoto(carModel.getMatricula()));
+					carModel.setFoto(queryDSLCar.getFotoId(carModel.getId()));
 				}
 				carService.addCar(carModel);
 				redirectAttributes.addFlashAttribute("successEdit", true);
@@ -124,8 +124,8 @@ public class CarController {
 	@GetMapping("/removeCar")
 	public String removeCar(
 			@RequestParam(name = "matricula", required = true, defaultValue = "NULL") String matricula) {
-		if (queryDSLCar.getFoto(matricula) != "") {
-			fileServiceImpl.removeFile(queryDSLCar.getFoto(matricula));
+		if (queryDSLCar.getFotoMatricula(matricula) != "") {
+			fileServiceImpl.removeFile(queryDSLCar.getFotoMatricula(matricula));
 		}
 		carService.removeCar(matricula);
 		return "redirect:/cars/listCars";

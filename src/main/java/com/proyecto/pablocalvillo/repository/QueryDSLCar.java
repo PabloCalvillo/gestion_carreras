@@ -23,11 +23,17 @@ public class QueryDSLCar {
 		return query.select(qcar.matricula).from(qcar).where(qcar.id.eq(id)).fetchOne();
 	}
 	
-	public String getFoto(String matricula) {
+	public String getFotoId(int id) {
+		JPAQuery<Car> query = new JPAQuery<Car>(em);
+		
+		return query.select(qcar.foto).from(qcar).where(qcar.id.eq(id)).fetchOne();
+
+	}
+
+	public String getFotoMatricula(String matricula) {
 		JPAQuery<Car> query = new JPAQuery<Car>(em);
 		
 		return query.select(qcar.foto).from(qcar).where(qcar.matricula.eq(matricula)).fetchOne();
 
 	}
-
 }
