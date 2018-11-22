@@ -49,6 +49,8 @@ public class RaceController {
 
 	@PostMapping("/addRace")
 	public String addRace(@ModelAttribute("race") RaceModel raceModel, RedirectAttributes redirectAttributes) {
+		 raceModel.setNombre(raceModel.getNombre().replaceAll("-", " "));
+		 System.out.println(raceModel.getNombre());
 		if (raceService.findByName(raceModel.getNombre()) == null) {
 			raceService.addRace(raceModel);
 			redirectAttributes.addFlashAttribute("success", true);
@@ -79,8 +81,9 @@ public class RaceController {
 	}
 
 	@GetMapping("/removeRace")
-	public String removeRace(@RequestParam(name = "id", required = true, defaultValue = "NULL") int id) {
+	public String removeRace(@RequestParam(name = "id", required = true, defaultValue = "NULL") int id, RedirectAttributes redirectAttributes) {
 		raceService.removeRace(id);
+		redirectAttributes.addFlashAttribute("success", true);
 		return "redirect:/races/edit";
 	}
 

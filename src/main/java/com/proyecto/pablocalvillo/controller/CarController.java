@@ -123,11 +123,12 @@ public class CarController {
 
 	@GetMapping("/removeCar")
 	public String removeCar(
-			@RequestParam(name = "matricula", required = true, defaultValue = "NULL") String matricula) {
+			@RequestParam(name = "matricula", required = true, defaultValue = "NULL") String matricula, RedirectAttributes redirectAttributes) {
 		if (queryDSLCar.getFotoMatricula(matricula) != "") {
 			fileServiceImpl.removeFile(queryDSLCar.getFotoMatricula(matricula));
 		}
 		carService.removeCar(matricula);
+		redirectAttributes.addFlashAttribute("success", true);
 		return "redirect:/cars/listCars";
 	}
 

@@ -35,6 +35,8 @@
 							<th scope="col">Matrícula</th>
 							<th scope="col">Gestionar / Eliminar</th>
 						</tr>
+						<div th:if="${success eq true}" class="alert alert-danger"
+							role="alert" style="margin: 0;">Coche eliminado con éxito</div>
 					</thead>
 					<tbody>
 						<tr th:each="car: ${cars}">

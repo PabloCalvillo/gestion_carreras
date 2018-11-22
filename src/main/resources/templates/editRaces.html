@@ -32,6 +32,8 @@
 							<th scope="col">Fecha</th>
 							<th scope="col">Gestionar / Eliminar</th>
 						</tr>
+						<div th:if="${success eq true}" class="alert alert-danger"
+							role="alert" style="margin: 0;">Carrera eliminada con éxito</div>
 					</thead>
 					<tbody>
 						<tr th:each="race: ${races}">
