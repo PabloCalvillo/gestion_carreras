@@ -12,6 +12,7 @@ public interface RaceService {
 	public abstract int removeRace(int id);
 	public abstract Race updateRace(RaceModel raceModel);
 	public abstract Race findById(int id);
-	public abstract Race findByName(String name);
+	public abstract Race findByNombre(String nombre);
+	public abstract Race findByNombreAndId(String nombre, int id);
 	public abstract List<Race> findByCiudad(String ciudad);
 }

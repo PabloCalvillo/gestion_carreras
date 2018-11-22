@@ -58,12 +58,17 @@ public class RaceServiceImpl implements RaceService {
 	}
 
 	@Override
-	public Race findByName(String name) {
+	public Race findByNombre(String name) {
 		return raceJpaRepository.findByNombre(name);
 	}
 
 	@Override
 	public List<Race> findByCiudad(String ciudad) {
 		return raceJpaRepository.findByCiudad(ciudad);
+	}
+
+	@Override
+	public Race findByNombreAndId(String nombre, int id) {
+		return queryDSLRace.findByNombreAndId(nombre, id);
 	}	
 }

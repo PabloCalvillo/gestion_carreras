@@ -56,9 +56,9 @@ public class ParticipationController {
 			redirectAttributes.addFlashAttribute("success", true);
 		} catch(Exception e) {
 			redirectAttributes.addFlashAttribute("success", false);
-			return "redirect:/races/editRace?id=" + raceService.findByName(participationModel.getCarrera()).getId();
+			return "redirect:/races/editRace?id=" + raceService.findByNombre(participationModel.getCarrera()).getId();
 		}	
-		return "redirect:/races/editRace?id=" + raceService.findByName(participationModel.getCarrera()).getId();
+		return "redirect:/races/editRace?id=" + raceService.findByNombre(participationModel.getCarrera()).getId();
 	}
 	
 	@GetMapping("/removeParticipation")

@@ -12,5 +12,7 @@ public interface CarService {
 	public abstract int removeCar(String matricula);
 	public abstract Car updateCar(CarModel carModel);
 	public abstract Car findByMatricula(String matricula);
-
+	public abstract Car findById(int id);
+	public abstract Car findByMatriculaAndId(String nombre, int id);
+	
 }

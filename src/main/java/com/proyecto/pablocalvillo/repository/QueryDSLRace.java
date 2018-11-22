@@ -7,6 +7,7 @@ import javax.persistence.PersistenceContext;
 
 import org.springframework.stereotype.Repository;
 
+import com.proyecto.pablocalvillo.entity.Car;
 import com.proyecto.pablocalvillo.entity.QRace;
 import com.proyecto.pablocalvillo.entity.Race;
 import com.querydsl.jpa.impl.JPAQuery;
@@ -35,6 +36,12 @@ public class QueryDSLRace {
 		JPAQuery<Race> query = new JPAQuery<Race>(em);
 		
 		return query.select(qrace.fecha).from(qrace).where(qrace.id.eq(id)).fetchOne();
+	}
+	
+	public Race findByNombreAndId(String nombre, int id) {
+		JPAQuery<Car> query = new JPAQuery<Car>(em);
+		
+		return query.select(qrace).from(qrace).where(qrace.nombre.eq(nombre)).where(qrace.id.eq(id)).fetchOne();
 	}
 
 }

@@ -1,9 +1,14 @@
 package com.proyecto.pablocalvillo.model;
 
+import javax.validation.constraints.Pattern;
+
 public class CarModel {
 	
 	private int id, potencia;
-	private String marca, modelo, matricula, color, foto;
+	private String marca, modelo, color, foto;
+	
+	@Pattern(regexp="^[0-9]{4}[a-zA-Z]{3}")
+	private String matricula;
 	
 	public CarModel() {
 		super();

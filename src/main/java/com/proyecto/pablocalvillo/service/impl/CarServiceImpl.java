@@ -11,6 +11,7 @@ import com.proyecto.pablocalvillo.converter.CarConverter;
 import com.proyecto.pablocalvillo.entity.Car;
 import com.proyecto.pablocalvillo.model.CarModel;
 import com.proyecto.pablocalvillo.repository.CarJpaRepository;
+import com.proyecto.pablocalvillo.repository.QueryDSLCar;
 import com.proyecto.pablocalvillo.service.CarService;
 
 @Service
@@ -23,6 +24,10 @@ public class CarServiceImpl implements CarService {
 	@Autowired
 	@Qualifier("carConverter")
 	private CarConverter carConverter;
+	
+	@Autowired
+	@Qualifier("queryDSLCar")
+	private QueryDSLCar queryDSLCar;
 
 	@Override
 	public List<CarModel> listAllCars() {
@@ -50,6 +55,16 @@ public class CarServiceImpl implements CarService {
 	@Override
 	public Car findByMatricula(String matricula) {
 		return carJpaRepository.findByMatricula(matricula);
+	}
+
+	@Override
+	public Car findById(int id) {
+		return carJpaRepository.findById(id);
+	}
+
+	@Override
+	public Car findByMatriculaAndId(String matricula, int id) {
+		return queryDSLCar.findByMatriculaAndId(matricula, id);
 	}
 
 	

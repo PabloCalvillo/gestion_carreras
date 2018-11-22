@@ -15,6 +15,14 @@
 <body>
 	<nav th:replace="fragments/navbar :: navbar"></nav>
 	<div class="contenedor">
+		<div th:if="${successEdit eq true}">
+			<div class="alert alert-primary" role="alert">Carrera editada
+				con éxito</div>
+		</div>
+		<div th:if="${successEdit eq false}">
+			<div class="alert alert-danger" role="alert">El nombre de la
+				carrera ya existe</div>
+		</div>
 		<div class="clearfix">
 			<div class="card border-secondary mb-3">
 				<form action="#" th:action="@{/participation/addParticipationRace}"
@@ -84,8 +92,10 @@
 							<form action="#" th:action="@{/races/removeParticipation}"
 								method="get">
 								<td><span th:text="${participation.carrera}">Carrera</span></td>
-								<td><a th:href="@{/cars/editCar?matricula=} + ${participation.coche}" 
-								th:text="${participation.coche}" id="enlaceCoche" title="Ir al coche">Coche</a></td>
+								<td><a
+									th:href="@{/cars/editCar?matricula=} + ${participation.coche}"
+									th:text="${participation.coche}" id="enlaceCoche"
+									title="Ir al coche">Coche</a></td>
 								<td><span th:text="${participation.posicion}">Posición</span></td>
 								<td><input type="text" name="id"
 									th:value=${participation.id} class="hidden" /> <input
@@ -110,14 +120,6 @@
 					<h1>Editar Carrera:</h1>
 				</div>
 				<div class="card-body">
-					<div th:if="${successEdit eq true}">
-						<div class="alert alert-primary" role="alert">Carrera
-							editada con éxito</div>
-					</div>
-					<div th:if="${successEdit eq false}">
-						<div class="alert alert-danger" role="alert">El nombre de la
-							carrera ya existe</div>
-					</div>
 					<div class="form-group">
 						<div>
 							<input type="text" name="id" hidden th:value="${race.id}"
