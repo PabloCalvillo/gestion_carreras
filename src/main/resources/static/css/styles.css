@@ -19,6 +19,11 @@ img {
 	border-radius: 15px;
 }
 
+.imgList {
+	width: 100px;
+	height: 80px;
+}
+
 input .inputImg {
 	padding-left: 0 !important;
 }
@@ -170,6 +175,11 @@ i {
 
 i:hover {
 	cursor: pointer;
+}
+
+.table td {
+	vertical-align: middle;
+	text-align: center;
 }
 
 td, th {

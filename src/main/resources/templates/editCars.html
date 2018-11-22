@@ -27,6 +27,7 @@
 				<table class="table">
 					<thead class="thead-light">
 						<tr>
+							<th scope="col">Imagen</th>
 							<th scope="col">Marca</th>
 							<th scope="col">Modelo</th>
 							<th scope="col">Potencia</th>
@@ -38,6 +39,7 @@
 					<tbody>
 						<tr th:each="car: ${cars}">
 							<form action="#" th:action="@{/cars/removeCar}" method="get">
+							<td><img class="imgList" th:src="@{/files/} + ${ car.foto != '' ? car.foto : 'imagendefecto.png'}" /></td>
 								<td><span th:text="${car.marca}">Marca</span></td>
 								<td><span th:text="${car.modelo}">Modelo</span></td>
 								<td><span th:text="${car.potencia}">Potencia</span></td>
