@@ -15,7 +15,12 @@ body {
 
 img {
 	width: 100%;
+	border-radius: 15px;
+}
+
+.imgDetails {
 	height: 100%;
+	overflow: hidden;
 	border-radius: 15px;
 }
 
