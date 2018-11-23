@@ -14,5 +14,4 @@ public interface RaceService {
 	public abstract Race findById(int id);
 	public abstract Race findByNombre(String nombre);
 	public abstract Race findByNombreAndId(String nombre, int id);
-	public abstract List<Race> findByCiudad(String ciudad);
 }

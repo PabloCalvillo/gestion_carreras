@@ -61,14 +61,4 @@ public class CarServiceImpl implements CarService {
 	public Car findById(int id) {
 		return carJpaRepository.findById(id);
 	}
-
-	@Override
-	public Car findByMatriculaAndId(String matricula, int id) {
-		return queryDSLCar.findByMatriculaAndId(matricula, id);
-	}
-
-	
-
-	
-
 }

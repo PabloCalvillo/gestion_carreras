@@ -22,9 +22,9 @@ import com.proyecto.pablocalvillo.model.CarModel;
 import com.proyecto.pablocalvillo.model.ParticipationModel;
 import com.proyecto.pablocalvillo.repository.QueryDSLCar;
 import com.proyecto.pablocalvillo.service.CarService;
+import com.proyecto.pablocalvillo.service.FileService;
 import com.proyecto.pablocalvillo.service.ParticipationService;
 import com.proyecto.pablocalvillo.service.RaceService;
-import com.proyecto.pablocalvillo.service.impl.FileServiceImpl;
 
 @Controller
 @RequestMapping("/cars")
@@ -48,7 +48,7 @@ public class CarController {
 
 	@Autowired
 	@Qualifier("fileServiceImpl")
-	FileServiceImpl fileServiceImpl;
+	FileService fileService;
 
 	@Autowired
 	@Qualifier("queryDSLCar")
@@ -76,7 +76,7 @@ public class CarController {
 		} else {
 			if (carService.findByMatricula(carModel.getMatricula()) == null) {
 				try {
-					carModel.setFoto(fileServiceImpl.saveFile(file));
+					carModel.setFoto(fileService.saveFile(file));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -98,11 +98,11 @@ public class CarController {
 		if (bindingResult.hasErrors()) {
 			redirectAttributes.addFlashAttribute("patternMatricula", false);
 		} else {
-			if (carService.findByMatriculaAndId(carService.findById(carModel.getId()).getMatricula(), carModel.getId()) != null) {
+			if (carService.findByMatricula(carService.findById(carModel.getId()).getMatricula()) != null) {
 				try {
 					if (!file.isEmpty()) {
-						fileServiceImpl.removeFile(queryDSLCar.getFotoId(carModel.getId()));
-						carModel.setFoto(fileServiceImpl.saveFile(file));
+						fileService.removeFile(queryDSLCar.getFotoId(carModel.getId()));
+						carModel.setFoto(fileService.saveFile(file));
 					} else {
 						carModel.setFoto(queryDSLCar.getFotoId(carModel.getId()));
 					}
@@ -130,7 +130,7 @@ public class CarController {
 		mav.addObject(carService.findByMatricula(matricula));
 		mav.addObject("races", raceService.listAllRaces());
 		mav.addObject("participation", new ParticipationModel());
-		mav.addObject("participations", participationService.listParticipations(matricula));
+		mav.addObject("participations", participationService.listCarParticipations(matricula));
 		return mav;
 	}
 
@@ -138,7 +138,7 @@ public class CarController {
 	public String removeCar(@RequestParam(name = "matricula", required = true, defaultValue = "NULL") String matricula,
 			RedirectAttributes redirectAttributes) {
 		if (queryDSLCar.getFotoMatricula(matricula) != "") {
-			fileServiceImpl.removeFile(queryDSLCar.getFotoMatricula(matricula));
+			fileService.removeFile(queryDSLCar.getFotoMatricula(matricula));
 		}
 		carService.removeCar(matricula);
 		redirectAttributes.addFlashAttribute("success", true);

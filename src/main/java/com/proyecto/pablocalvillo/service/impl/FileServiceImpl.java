@@ -8,8 +8,10 @@ import java.nio.file.Paths;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.proyecto.pablocalvillo.service.FileService;
+
 @Service
-public class FileServiceImpl {
+public class FileServiceImpl implements FileService {
 
 	private String upload_folder = ".//src//main//resources//static//files//";
 

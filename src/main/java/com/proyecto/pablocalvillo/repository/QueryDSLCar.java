@@ -35,9 +35,4 @@ public class QueryDSLCar {
 		return query.select(qcar.foto).from(qcar).where(qcar.matricula.eq(matricula)).fetchOne();
 	}
 
-	public Car findByMatriculaAndId(String matricula, int id) {
-		JPAQuery<Car> query = new JPAQuery<Car>(em);
-		
-		return query.select(qcar).from(qcar).where(qcar.matricula.eq(matricula)).where(qcar.id.eq(id)).fetchOne();
-	}
 }

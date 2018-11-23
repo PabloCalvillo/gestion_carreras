@@ -47,7 +47,7 @@ public class ParticipationServiceImpl implements ParticipationService {
 	}
 	
 	@Override
-	public List<ParticipationModel> listParticipations(String matricula) {
+	public List<ParticipationModel> listCarParticipations(String matricula) {
 		List<ParticipationModel> participationsModel = participationJpaRepository.findByidCoche(carJpaRepository.findByMatricula(matricula).getId())
 				.stream().map(participation -> participationConverter.entity2model(participation)).collect(Collectors.toList());
 		return participationsModel;
@@ -71,9 +71,5 @@ public class ParticipationServiceImpl implements ParticipationService {
 		return 0;
 	}
 
-	@Override
-	public Participation updateParticipation(ParticipationModel participationModel) {
-		return participationJpaRepository.save(participationConverter.model2entity(participationModel));
-	}
 }
 
